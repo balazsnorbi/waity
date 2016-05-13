@@ -13,7 +13,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+    <style name="AppTheme.NoTitle">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme.NoTitle">
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="colorPrimary">@android:color/transparent</item>

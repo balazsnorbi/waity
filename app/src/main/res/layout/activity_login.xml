@@ -12,25 +12,24 @@
         <RelativeLayout
             android:id="@+id/rl_logo"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="@dimen/login_logo_height">
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/login_logo_waity"
-                android:layout_height="200dp" />
+                android:layout_height="@dimen/login_logo_height" />
 
         </RelativeLayout>
 
         <EditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/login_field_height"
             android:layout_below="@id/rl_logo"
-            android:layout_margin="15dp"
-            android:layout_marginTop="-15dp"
+            android:layout_margin="@dimen/login_field_margin"
             android:backgroundTint="@android:color/white"
-            android:hint="Username"
+            android:hint="@string/login_username_title"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
@@ -38,23 +37,22 @@
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/login_field_height"
             android:layout_below="@id/et_username"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/login_field_margin"
             android:backgroundTint="@android:color/white"
-            android:hint="Password"
+            android:hint="@string/login_password_title"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:elevation="7dp"
+            android:layout_height="@dimen/login_field_height"
             android:layout_below="@id/et_password"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/login_field_margin"
             android:background="@color/colorPrimary"
-            android:text="Login"
+            android:text="@string/login_button_title"
             android:textColor="@android:color/white" />
 
     </RelativeLayout>
