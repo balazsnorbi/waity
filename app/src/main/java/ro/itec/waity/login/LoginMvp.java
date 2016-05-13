@@ -15,6 +15,7 @@ public interface LoginMVP {
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface ProvidedPresenterOps {
+        void login(String username, String password);
     }
 
     /**

@@ -2,6 +2,8 @@
 <manifest package="ro.itec.waity"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk android:minSdkVersion="10"/>
 
     <uses-permission
@@ -18,9 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ro.itec.waity.login.view.LoginActivityView"
+            android:name=".login.view.LoginActivityView"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
