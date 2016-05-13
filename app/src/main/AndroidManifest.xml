@@ -43,7 +43,7 @@
         <activity
             android:name=".table.view.TableActivity"
             android:label="@string/title_activity_table"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.ActionBar.Transparent">
         </activity>
     </application>
 
