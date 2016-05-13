@@ -45,9 +45,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginMVP.Req
 
         // Initialise the NFC manager to make the application ready to read NFC tags
         NFCManager.INSTANCE.init(this);
-
-        // Check for intent type and decide if it's NFC related or not
-        NFCManager.INSTANCE.handleIntent(this, getIntent());
     }
 
     @OnClick(R.id.bt_login_login)
@@ -61,9 +58,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginMVP.Req
 
         // It's important, that the activity is in the foreground (resumed). Otherwise an IllegalStateException is thrown.
         NFCManager.INSTANCE.setupForegroundDispatch(this);
-
-        // Primary check for NFC status: at this point, the user will be able to enable the NFC without manually accessing the settings menu
-        NFCManager.INSTANCE.checkNFCStatus(this);
     }
 
     @Override
