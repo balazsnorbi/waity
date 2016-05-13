@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import ro.itec.waity.R;
 import ro.itec.waity.login.LoginMVP;
-import ro.itec.waity.table.backend.NFCEventListener;
-import ro.itec.waity.table.backend.NFCManager;
+import ro.itec.waity.bl.nfc.NFCEventListener;
+import ro.itec.waity.bl.nfc.NFCManager;
 
 public class LoginActivityView extends AppCompatActivity implements LoginMVP.RequiredViewOps, NFCEventListener {
 
@@ -32,20 +32,18 @@ public class LoginActivityView extends AppCompatActivity implements LoginMVP.Req
     protected void onResume() {
         super.onResume();
 
-        /**
-         * It's important, that the activity is in the foreground (resumed). Otherwise
-         * an IllegalStateException is thrown.
-         */
+        // It's important, that the activity is in the foreground (resumed). Otherwise an IllegalStateException is thrown.
         NFCManager.INSTANCE.setupForegroundDispatch(this);
+
+        // Primary check for NFC status: at this point, the user will be able to enable the NFC without manually accessing the settings menu
+        NFCManager.INSTANCE.checkNFCStatus(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        /**
-         * Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
-         */
+        // Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
         NFCManager.INSTANCE.stopForegroundDispatch(this);
     }
 

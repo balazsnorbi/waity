@@ -1,4 +1,4 @@
-package ro.itec.waity.table.backend;
+package ro.itec.waity.bl.nfc;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +14,8 @@ import android.provider.Settings;
 import android.util.Log;
 
 import ro.itec.waity.R;
+import ro.itec.waity.bl.nfc.NFCEventListener;
+import ro.itec.waity.bl.nfc.NdefReaderTask;
 
 /**
  * Handles NFC related events
@@ -27,6 +29,7 @@ public enum NFCManager {
 
    /**
     * Call this method first to initialise the NFCManager
+    *
     * @param context Context
     * @return true if NFC is available on this device
     */
@@ -39,13 +42,14 @@ public enum NFCManager {
          succeeded = false;
       }
 
-      return succeeded ;
+      return succeeded;
    }
 
    /**
     * Used to handle NDEF_DISCOVERED intent.
+    *
     * @param listener NFCEventListener
-    * @param intent Intent
+    * @param intent   Intent
     * @return Returns true if the correct event occurred - false if it was ignored.
     */
    public final boolean handleIntent(NFCEventListener listener, Intent intent) {
@@ -101,7 +105,40 @@ public enum NFCManager {
       adapter.disableForegroundDispatch(activity);
    }
 
-   public final void checkNFCStatus() {
-      if (!adapter.isEnabled()) {      }
+   /**
+    * Primary check for NFC status: at this point, the user will be able to enable the NFC without manually accessing the settings menu
+    * @param context Context
+    * @return nfcStatus
+    */
+   public final boolean checkNFCStatus(final Context context) {
+      boolean nfcIsEnabled = adapter.isEnabled();
+      if (!nfcIsEnabled) {
+         AlertDialog.Builder alertBox = new AlertDialog.Builder(context);
+         alertBox.setCancelable(false);
+         alertBox.setTitle(R.string.nfc_alert_box_info);
+         alertBox.setMessage(R.string.nfc_alert_box_question);
+         alertBox.setPositiveButton(R.string.nfc_alert_box_positive_btn, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                  Intent intent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                  context.startActivity(intent);
+               } else {
+                  Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                  context.startActivity(intent);
+               }
+            }
+         });
+         alertBox.setNegativeButton(R.string.nfc_alert_box_negative_btn, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+         });
+         alertBox.show();
       }
+
+      return nfcIsEnabled;
+   }
 }

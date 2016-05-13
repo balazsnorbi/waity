@@ -1,4 +1,4 @@
-package ro.itec.waity.table.backend;
+package ro.itec.waity.bl.nfc;
 
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;

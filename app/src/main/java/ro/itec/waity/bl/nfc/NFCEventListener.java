@@ -1,4 +1,4 @@
-package ro.itec.waity.table.backend;
+package ro.itec.waity.bl.nfc;
 
 /**
  * Created by Norbert on 5/13/2016.
