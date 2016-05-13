@@ -5,7 +5,6 @@ import android.util.Log;
 import ro.itec.waity.api.ApiServiceManager;
 import ro.itec.waity.api.UserResponse;
 import ro.itec.waity.login.LoginMVP;
-import ro.itec.waity.login.model.LoginModel;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -18,7 +17,7 @@ public class LoginPresenter implements LoginMVP.ProvidedPresenterOps {
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
 
-    public LoginPresenter(LoginModel model) {
+    public LoginPresenter(LoginMVP.ProvidedModelOps model) {
         this.model = model;
     }
 
