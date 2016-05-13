@@ -2,39 +2,42 @@
 <manifest package="ro.itec.waity"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-sdk android:minSdkVersion="10"/>
 
     <uses-permission
-        android:name="android.permission.NFC" />
+        android:name="android.permission.CAMERA"/>
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.NFC"/>
 
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true"/>
 
     <application
+        android:name=".app.WaityApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".app.WaityApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".login.view.LoginActivityView"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain" />
-            </intent-filter>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
         </activity>
     </application>
 

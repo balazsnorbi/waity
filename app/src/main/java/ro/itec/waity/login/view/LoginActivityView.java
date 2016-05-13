@@ -1,6 +1,7 @@
 package ro.itec.waity.login.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -56,6 +57,9 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
         setErrorIndicatorBounds();
 
         presenter = new LoginPresenter(this, new LoginModel());
+
+        // TODO: remove
+//        startActivity(new Intent(this, TableActivity.class));
     }
 
     private void loadImages() {
