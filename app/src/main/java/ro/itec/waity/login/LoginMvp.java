@@ -1,6 +1,6 @@
 package ro.itec.waity.login;
 
-import ro.itec.waity.api.UserResponse;
+import ro.itec.waity.api.model.UserResponse;
 import rx.Observable;
 
 public interface LoginMvp {

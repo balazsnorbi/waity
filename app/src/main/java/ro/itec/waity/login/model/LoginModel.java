@@ -1,7 +1,7 @@
 package ro.itec.waity.login.model;
 
 import ro.itec.waity.api.ApiServiceManager;
-import ro.itec.waity.api.UserResponse;
+import ro.itec.waity.api.model.UserResponse;
 import ro.itec.waity.login.LoginMvp;
 import rx.Observable;
 

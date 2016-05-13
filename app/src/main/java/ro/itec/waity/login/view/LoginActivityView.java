@@ -1,6 +1,7 @@
 package ro.itec.waity.login.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import ro.itec.waity.R;
 import ro.itec.waity.login.LoginMvp;
 import ro.itec.waity.login.model.LoginModel;
 import ro.itec.waity.login.presenter.LoginPresenter;
+import ro.itec.waity.order.view.OrderActivityView;
 
 public class LoginActivityView extends AppCompatActivity implements LoginMvp.RequiredViewOps{
     private static final String TAG = LoginActivityView.class.getName();
@@ -123,12 +125,12 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
                 progress.dismiss();
             }
         }, delay);
-
     }
 
     @Override
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, OrderActivityView.class));
     }
 
     @Override

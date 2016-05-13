@@ -2,7 +2,7 @@ package ro.itec.waity.login.presenter;
 
 import android.util.Log;
 
-import ro.itec.waity.api.UserResponse;
+import ro.itec.waity.api.model.UserResponse;
 import ro.itec.waity.login.LoginMvp;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
