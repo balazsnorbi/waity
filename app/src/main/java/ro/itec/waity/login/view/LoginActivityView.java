@@ -19,7 +19,7 @@ import ro.itec.waity.login.presenter.LoginPresenter;
 import ro.itec.waity.bl.nfc.NFCEventListener;
 import ro.itec.waity.bl.nfc.NFCManager;
 
-public class LoginActivityView extends AppCompatActivity implements LoginMVP.RequiredViewOps {
+public class LoginActivityView extends AppCompatActivity implements LoginMVP.RequiredViewOps, NFCEventListener {
     @BindView(R.id.bt_login_login)
     Button btLogin;
 
@@ -30,7 +30,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginMVP.Req
     EditText etPassword;
 
     private LoginMVP.ProvidedPresenterOps presenter;
-public class LoginActivityView extends AppCompatActivity implements LoginMVP.RequiredViewOps, NFCEventListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
