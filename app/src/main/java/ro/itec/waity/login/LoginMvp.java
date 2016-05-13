@@ -1,6 +1,9 @@
 package ro.itec.waity.login;
 
-public interface LoginMVP {
+import ro.itec.waity.api.UserResponse;
+import rx.Observable;
+
+public interface LoginMvp {
 
     /**
      * Required View methods available to Presenter.
@@ -8,6 +11,18 @@ public interface LoginMVP {
      * and receive user interactions
      */
     interface RequiredViewOps {
+
+        void showUsernameNotBlankError();
+
+        void showPasswordNotBlankError();
+
+        void showProgressBar();
+
+        void hideProgressBar(int delay);
+
+        void showToast(String text);
+
+        void authenticationCompleted(Integer userId);
     }
 
     /**
@@ -29,6 +44,7 @@ public interface LoginMVP {
      * Handles all data business logic.
      */
     interface ProvidedModelOps {
+        Observable<UserResponse> getUser(String email, String password);
     }
 
 }

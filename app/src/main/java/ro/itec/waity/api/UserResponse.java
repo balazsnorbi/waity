@@ -6,8 +6,12 @@ public class UserResponse {
 
     @SerializedName("status")
     private String status;
+
     @SerializedName("user_id")
     private Integer userId;
+
+    @SerializedName("message")
+    private String message;
 
     /**
      *
@@ -45,8 +49,16 @@ public class UserResponse {
         this.userId = userId;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
-        return status + " " + userId;
+        return status + " " + message + " " + userId;
     }
 }
