@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +26,16 @@ import ro.itec.waity.login.presenter.LoginPresenter;
 public class LoginActivityView extends AppCompatActivity implements LoginMvp.RequiredViewOps{
     private static final String TAG = LoginActivityView.class.getName();
 
-    @BindView(R.id.bt_login_login)
-    Button btLogin;
+    @BindView(R.id.iv_login_waity)
+    ImageView ivTextLogo;
     @BindView(R.id.et_login_username)
     EditText etUsername;
     @BindView(R.id.et_login_password)
     EditText etPassword;
+    @BindView(R.id.bt_login_login)
+    Button btLogin;
+    @BindView(R.id.iv_login_logo)
+    ImageView ivLogo;
 
     private ProgressDialog progress;
 
@@ -42,12 +49,24 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        loadImages();
         setStatusBarTranslucent(true);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setProgressBar();
         setErrorIndicatorBounds();
 
         presenter = new LoginPresenter(this, new LoginModel());
+    }
+
+    private void loadImages() {
+        Glide.with(this)
+                .load(R.drawable.login_logo_waity)
+                .crossFade()
+                .into(ivTextLogo);
+        Glide.with(this)
+                .load(R.drawable.login_waiter)
+                .crossFade()
+                .into(ivLogo);
     }
 
     private void setErrorIndicatorBounds() {
