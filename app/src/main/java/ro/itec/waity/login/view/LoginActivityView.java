@@ -42,17 +42,17 @@ public class LoginActivityView extends AppCompatActivity implements LoginMVP.Req
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         presenter = new LoginPresenter(new LoginModel());
-    }
-
-    @OnClick(R.id.bt_login_login)
-    void onLoginClick() {
-        presenter.login(etUsername.getText().toString(), etPassword.getText().toString());
 
         // Initialise the NFC manager to make the application ready to read NFC tags
         NFCManager.INSTANCE.init(this);
 
         // Check for intent type and decide if it's NFC related or not
         NFCManager.INSTANCE.handleIntent(this, getIntent());
+    }
+
+    @OnClick(R.id.bt_login_login)
+    void onLoginClick() {
+        presenter.login(etUsername.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
