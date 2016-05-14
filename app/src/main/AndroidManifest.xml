@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ro.itec.waity">
+<manifest package="ro.itec.waity"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -8,7 +8,7 @@
 
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="true" />
+        android:required="true"/>
 
     <application
         android:name=".app.WaityApplication"
@@ -26,6 +26,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".table.view.TableActivity"
+            android:label="@string/title_activity_table"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
@@ -35,18 +40,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".table.view.TableActivity"
-            android:label="@string/title_activity_table"
-            android:theme="@style/AppTheme.ActionBar.Transparent">
-        </activity>
-
-        <activity
             android:name=".order.view.OrderActivityView"
-            android:theme="@style/AppTheme.ActionBar.Transparent" />
+            android:theme="@style/AppTheme.ActionBar.Transparent"/>
         <activity
             android:name=".table.view.AnyOrientationCaptureActivity"
-            android:screenOrientation="fullSensor"
-            android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>

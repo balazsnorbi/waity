@@ -1,14 +1,10 @@
 package ro.itec.waity.table.view;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.journeyapps.barcodescanner.CaptureActivity;
 
-import ro.itec.waity.R;
-
-
+/**
+ * This activity is used to read QR Codes
+ */
 public class AnyOrientationCaptureActivity extends CaptureActivity {
-
 
 }

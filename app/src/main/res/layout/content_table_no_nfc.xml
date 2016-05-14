@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ro.itec.waity.table.view.TableActivity"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="12">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/nfc_is_off_to_activate_it_press_the_symbol_below"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentTop="true"/>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rippleView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="8">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/activate_nfc"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/white"/>
+
+        </com.andexert.library.RippleView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/or_read_the_qr_code"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
