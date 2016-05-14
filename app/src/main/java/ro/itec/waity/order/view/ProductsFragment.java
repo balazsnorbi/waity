@@ -3,6 +3,7 @@ package ro.itec.waity.order.view;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +31,7 @@ import ro.itec.waity.order.OrderMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrderCategoryPresenter;
 
-public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewOps, OnProductClickListener {
+public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewOps, OnProductClickListener, OnProductAddListener {
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
     @BindView(R.id.pb_products_progressBar)
@@ -58,7 +64,7 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     }
 
     private void initProducts(View view) {
-         itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
+        itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
 
         int columnsPerLine = 2;
         int orientation = getResources().getConfiguration().orientation;
@@ -99,13 +105,13 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     @Override
     public void addCategory(Category category) {
         this.categories.add(category);
-        categoriesAdapter.notifyItemInserted(categories.size() - 1);
+        categoriesAdapter.notifyItemInserted(categories.size());
     }
 
     @Override
     public void addProduct(Produse product) {
         this.products.add(product);
-        productsAdapter.notifyItemInserted(products.size() - 1);
+        productsAdapter.notifyItemInserted(products.size());
     }
 
     @Override
@@ -117,7 +123,7 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         products = new LinkedList<>();
-        productsAdapter = new ProductsRecyclerViewAdapter(products, getContext());
+        productsAdapter = new ProductsRecyclerViewAdapter(products, this, getContext());
         itemsRecyclerView.setAdapter(productsAdapter);
         itemsRecyclerView.requestLayout();
     }
@@ -126,6 +132,45 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     public void onClick(Category category) {
         Log.i(TAG, "onClick: " + category.getDescription());
         presenter.fetchProductsForCategory(category);
+    }
+
+    @Override
+    public void onProductAdd(Produse product) {
+        // Create the fragment and show it as a dialog.
+        DialogFragment newFragment = AddProductDialogFragment.newInstance();
+        newFragment.show(getFragmentManager(), "dialog");
+    }
+
+    public static class AddProductDialogFragment extends DialogFragment {
+
+        @BindView(R.id.iv_dialog_product_add_picture)
+        ImageView ivPicture;
+        @BindView(R.id.tv_dialog_product_add_quantity)
+        TextView tvQuantity;
+        @BindView(R.id.et_dialog_product_add_quantity)
+        EditText etQuantity;
+        @BindView(R.id.tv_dialog_product_add_extra)
+        TextView tvExtra;
+        @BindView(R.id.et_dialog_product_add_extra)
+        EditText etExtra;
+
+        static AddProductDialogFragment newInstance() {
+            return new AddProductDialogFragment();
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.fragment_add_product_dialog, container, false);
+            ButterKnife.bind(this, v);
+            return v;
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            Glide.with(getContext()).load(R.drawable.burger).into(ivPicture);
+        }
     }
 
 }

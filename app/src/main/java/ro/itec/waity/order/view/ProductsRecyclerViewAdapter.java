@@ -20,9 +20,12 @@ public class ProductsRecyclerViewAdapter
 
     private final LinkedList<Produse> products;
     private final Context context;
+    private final OnProductAddListener listener;
 
-    public ProductsRecyclerViewAdapter(LinkedList<Produse> products, Context context) {
+    public ProductsRecyclerViewAdapter(LinkedList<Produse> products, OnProductAddListener listener,
+                                       Context context) {
         this.products = products;
+        this.listener = listener;
         this.context = context;
     }
 
@@ -34,14 +37,27 @@ public class ProductsRecyclerViewAdapter
     }
 
     @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
+    public void onBindViewHolder(ProductViewHolder holder, final int position) {
         Glide.with(context)
                 //.load(products.get(position).getImageSrcId()
                 .load(R.drawable.burger)
                 .into(holder.ivPicture);
 
+        Glide.with(context)
+                //.load(products.get(position).getImageSrcId()
+                .load(R.drawable.ic_action_add)
+                .into(holder.ivAddIcon);
+
         holder.tvDescription.setText(products.get(position).getDescription().trim());
         holder.tvPrice.setText(products.get(position).getPrice().trim());
+
+
+        holder.ivAddIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onProductAdd(products.get(position));
+            }
+        });
     }
 
     @Override
@@ -54,6 +70,7 @@ public class ProductsRecyclerViewAdapter
         private final ImageView ivPicture;
         private final TextView tvDescription;
         private final TextView tvPrice;
+        private final ImageView ivAddIcon;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +78,7 @@ public class ProductsRecyclerViewAdapter
             this.ivPicture = (ImageView) itemView.findViewById(R.id.iv_product_picture);
             this.tvDescription = (TextView) itemView.findViewById(R.id.tv_product_description);
             this.tvPrice = (TextView) itemView.findViewById(R.id.tv_product_price);
+            this.ivAddIcon = (ImageView) itemView.findViewById(R.id.iv_product_add);
         }
     }
 
