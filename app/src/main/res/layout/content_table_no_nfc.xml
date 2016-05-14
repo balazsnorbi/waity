@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="12">
+        android:weightSum="12"
+        android:background="@color/colorPrimaryDark">
 
         <TextView
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerInside"
             android:src="@drawable/activate_nfc"
-            android:backgroundTint="@color/transparent"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:tint="@color/white"/>
 
         </com.andexert.library.RippleView>
