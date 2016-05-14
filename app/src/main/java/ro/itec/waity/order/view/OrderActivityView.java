@@ -46,6 +46,24 @@ public class OrderActivityView extends AppCompatActivity {
       tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
       tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
+      tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+         @Override
+         public void onTabSelected(TabLayout.Tab tab) {
+            viewPager.setCurrentItem(tab.getPosition());
+         }
+
+         @Override
+         public void onTabUnselected(TabLayout.Tab tab) {
+            // Nothing to do here now
+         }
+
+         @Override
+         public void onTabReselected(TabLayout.Tab tab) {
+            // Nothing to do here now
+         }
+      });
+
       viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
    }
 
