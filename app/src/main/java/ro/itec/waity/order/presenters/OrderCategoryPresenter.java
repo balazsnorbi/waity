@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import ro.itec.waity.api.model.PlaceOrderResponse;
 import ro.itec.waity.api.model.ProductsResponse;
 import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
@@ -155,7 +156,7 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
         subscriptions.add(model.checkoutTempOrder()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Void>() {
+                .subscribe(new Subscriber<PlaceOrderResponse>() {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted: ");
@@ -170,8 +171,8 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
                     }
 
                     @Override
-                    public void onNext(Void Void) {
-                        Log.d(TAG, "onNext: ");
+                    public void onNext(PlaceOrderResponse placeOrderResponse) {
+                        Log.d(TAG, "onNext: " + placeOrderResponse);
                     }
                 }));
     }

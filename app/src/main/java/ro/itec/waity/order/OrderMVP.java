@@ -1,9 +1,10 @@
 package ro.itec.waity.order;
 
-import ro.itec.waity.api.model.ProductsResponse;
-import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
+import ro.itec.waity.api.model.ProductsResponse;
+import ro.itec.waity.api.model.Produse;
+import ro.itec.waity.api.model.PlaceOrderResponse;
 import rx.Observable;
 
 public interface OrderMVP {
@@ -64,7 +65,8 @@ public interface OrderMVP {
 
         Observable<Void> addTempProductOrder(Produse product, Integer quantity, String extra);
 
-        Observable<Void> checkoutTempOrder();
+        Observable<PlaceOrderResponse> checkoutTempOrder();
+
     }
 
 }
