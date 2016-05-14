@@ -3,9 +3,6 @@
     package="ro.itec.waity">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-sdk android:minSdkVersion="10" />
-
     <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature
