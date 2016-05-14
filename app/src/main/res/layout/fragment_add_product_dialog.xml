@@ -71,14 +71,14 @@
 
         <ImageView
             android:id="@+id/iv_dialog_product_add_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="50dp" />
 
         <ImageView
             android:id="@+id/iv_dialog_product_add_proceed"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_margin="50dp" />

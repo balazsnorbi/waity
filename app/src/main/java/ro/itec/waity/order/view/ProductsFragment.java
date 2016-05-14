@@ -235,6 +235,7 @@ public class ProductsFragment extends Fragment
         void onProceedClick() {
             listener.addProductOrder(product, Integer.valueOf(etQuantity.getText().toString()),
                     etExtra.getText().toString());
+            dismiss();
         }
 
         public void setProduct(Produse product) {
