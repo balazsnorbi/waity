@@ -21,4 +21,5 @@
         android:src="@drawable/nfc"
         android:tint="@color/white"/>
 
+
 </RelativeLayout>

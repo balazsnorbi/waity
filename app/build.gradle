@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
+repositories {
+    jcenter()
+}
+
+android {
+    buildToolsVersion '23.0.2' // Older versions may give compile errors
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -41,6 +49,9 @@ dependencies {
     // Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
-    compile 'com.android.support:appcompat-v7'
+    // NFC & Barcode Scanner
+    compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:support-v13:23.2.0'
+    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    compile 'com.google.zxing:core:3.2.1'
 }
