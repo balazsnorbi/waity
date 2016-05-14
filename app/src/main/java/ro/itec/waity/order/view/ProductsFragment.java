@@ -40,6 +40,7 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
 
     private LinkedList<Produse> products;
     private ProductsRecyclerViewAdapter productsAdapter;
+    private boolean isProductsPerspective = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -111,6 +112,8 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     public void switchToProductsPerspective() {
         Log.i(TAG, "switchToProductsPerspective: ");
 
+        isProductsPerspective = true;
+
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         products = new LinkedList<>();
@@ -124,4 +127,5 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
         Log.i(TAG, "onClick: " + category.getDescription());
         presenter.fetchProductsForCategory(category);
     }
+
 }
