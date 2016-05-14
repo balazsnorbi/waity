@@ -4,8 +4,8 @@ import android.util.Log;
 
 import java.util.List;
 
-import ro.itec.waity.api.ProductsResponse;
-import ro.itec.waity.api.Produse;
+import ro.itec.waity.api.model.ProductsResponse;
+import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.order.OrderMVP;
@@ -147,5 +147,11 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
                         Log.d(TAG, "onNext: ");
                     }
                 }));
+    }
+
+    @Override
+    public void checkoutTempOrder() {
+        view.showProgressBar();
+        subscriptions.add(model.checkoutTempOrder());
     }
 }

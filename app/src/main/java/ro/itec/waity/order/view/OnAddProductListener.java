@@ -1,8 +1,6 @@
 package ro.itec.waity.order.view;
 
-import android.text.Editable;
-
-import ro.itec.waity.api.Produse;
+import ro.itec.waity.api.model.Produse;
 
 public interface OnAddProductListener {
 

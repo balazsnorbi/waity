@@ -2,13 +2,10 @@ package ro.itec.waity.bl.persistence.temporary_order;
 
 import com.orm.SugarRecord;
 
-/**
- * Created by Norbert on 5/14/2016.
- */
 public class TemporaryProduct extends SugarRecord{
-   Integer productId;
-   Integer quantity;
-   String extra;
+   public Integer productId;
+   public Integer quantity;
+   public String extra;
 
    public TemporaryProduct() {}
 

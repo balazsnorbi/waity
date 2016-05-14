@@ -1,6 +1,6 @@
 package ro.itec.waity.order.view;
 
-import ro.itec.waity.api.Produse;
+import ro.itec.waity.api.model.Produse;
 
 public interface OnProductAddListener {
 

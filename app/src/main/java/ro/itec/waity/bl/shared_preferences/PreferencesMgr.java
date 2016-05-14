@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Norbert on 5/14/2016.
- */
 public enum PreferencesMgr {
    INSTANCE;
 
@@ -16,11 +13,11 @@ public enum PreferencesMgr {
       preferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
    }
 
-   public String readString(String key, String value) {
+   public String readString(String key) {
       return preferences.getString(key, null);
    }
 
-   public int readInt(String key, String value) {
+   public int readInt(String key) {
       return preferences.getInt(key, 0);
    }
 

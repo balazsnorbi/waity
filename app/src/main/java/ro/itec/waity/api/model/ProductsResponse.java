@@ -1,4 +1,4 @@
-package ro.itec.waity.api;
+package ro.itec.waity.api.model;
 
 import com.google.gson.annotations.SerializedName;
 

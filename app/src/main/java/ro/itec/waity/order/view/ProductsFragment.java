@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.itec.waity.R;
-import ro.itec.waity.api.Produse;
+import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.order.OrderMVP;
 import ro.itec.waity.order.model.OrderModel;
@@ -94,6 +94,9 @@ public class ProductsFragment extends Fragment
     }
 
     @OnClick(R.id.fb_product_checkout)
+    void onCheckoutClick() {
+        presenter.checkoutTempOrder();
+    }
 
     @Override
     public void showProgressBar() {

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.LinkedList;
 
 import ro.itec.waity.R;
-import ro.itec.waity.api.Produse;
+import ro.itec.waity.api.model.Produse;
 
 public class ProductsRecyclerViewAdapter
         extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductViewHolder>{
