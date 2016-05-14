@@ -7,19 +7,15 @@ public class TemporaryProduct extends SugarRecord{
    public Integer quantity;
    public String extra;
    public String description;
+   public String price;
 
    public TemporaryProduct() {}
 
-   public TemporaryProduct(Integer product_id, Integer quantity, String extra) {
-      this.productId = product_id;
-      this.quantity = quantity;
-      this.extra = extra;
-   }
-
-   public TemporaryProduct(Integer product_id, Integer quantity, String extra, String description) {
+   public TemporaryProduct(Integer product_id, Integer quantity, String extra, String description, String price) {
       this.productId = product_id;
       this.quantity = quantity;
       this.extra = extra;
       this.description = description;
+      this.price = price;
    }
 }

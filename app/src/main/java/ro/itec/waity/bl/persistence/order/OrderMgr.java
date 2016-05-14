@@ -10,13 +10,8 @@ import java.util.List;
 public enum OrderMgr {
    INSTANCE;
 
-   /**
-    * Adds a new order to the DB
-    * @param orderID OrderID
-    * @param orderState OrderState
-    */
-   public final void addOrder(Integer orderID, OrderState orderState) {
-      Order order = new Order(orderID, orderState);
+   public final void addOrder(Integer orderId, Integer productId, Integer quantity, String extra, String description, int price, OrderState orderState) {
+      Order order = new Order(orderId, productId, quantity, extra, description, price, orderState);
       order.save();
    }
 
@@ -34,26 +29,16 @@ public enum OrderMgr {
          order.orderState = newState;
          order.save();
          success = true;
-         // TODO: remove orders when newState is Payed
       }
 
       return success;
    }
 
    /**
-    * Returns all the activer orders
+    * Returns all the active orders
     * @return OrderList
     */
    public final List<Order> getOrdersList() {
       return Order.listAll(Order.class);
-   }
-
-   /**
-    * Returns all the OrderedProducts for the givem orderID
-    * @param orderID ID Of the Order
-    * @return ProductList ordered
-    */
-   public final List<OrderedProduct> getOrderedProducts(int orderID) {
-      return OrderedProduct.find(OrderedProduct.class, "order = ?", "" + orderID);
    }
 }

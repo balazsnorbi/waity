@@ -18,8 +18,8 @@ public enum TemporaryOrderMgr {
     * @param extra Extra
     * @param description Description
     */
-   public final void addProductToOrder(int productID, String description, int quantity, String extra) {
-      TemporaryProduct temporaryProduct = new TemporaryProduct(productID, quantity, extra, description);
+   public final void addProductToOrder(int productID, String description, int quantity, String extra, String price) {
+      TemporaryProduct temporaryProduct = new TemporaryProduct(productID, quantity, extra, description, price);
       temporaryProduct.save();
    }
 

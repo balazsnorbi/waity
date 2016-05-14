@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -32,10 +34,14 @@ import ro.itec.waity.table.presenter.TablePresenter;
  */
 public class TableActivity extends AppCompatActivity implements TableMVP.ViewOperations {
 
+    private static final int IMAGE_CHANGE_DELAY = 750; // millis
+
     @BindView(R.id.viewFlipper)
     protected ViewFlipper viewFlipper;
     @BindView(R.id.rippleView)
     protected RippleView rippleView;
+    @BindView(R.id.animatedNFC)
+    protected ImageView imageView;
     private TableMVP.PresenterOperations presenter;
     private boolean firstShown = true;
 
@@ -60,6 +66,27 @@ public class TableActivity extends AppCompatActivity implements TableMVP.ViewOpe
                 startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
             }
         });
+
+        final ImageView tempImageView = imageView;
+
+        tempImageView.postDelayed(new Runnable() {
+            int i = 0;
+            @Override
+            public void run() {
+                switch (i++ % 3) {
+                    case 0:
+                        tempImageView.setImageResource(R.drawable.nfc_t);
+                        break;
+                    case 1:
+                        tempImageView.setImageResource(R.drawable.nfc_t1);
+                        break;
+                    case 2:
+                        tempImageView.setImageResource(R.drawable.nfc_t2);
+                        break;
+                }
+                tempImageView.postDelayed(this, IMAGE_CHANGE_DELAY);
+            }
+        }, IMAGE_CHANGE_DELAY);
     }
 
     @Override

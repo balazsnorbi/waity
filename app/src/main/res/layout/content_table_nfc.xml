@@ -36,10 +36,10 @@
             android:layout_weight="8">
 
             <ImageView
+                android:id="@+id/animatedNFC"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
-                android:src="@drawable/nfc"
                 android:tint="@color/white"/>
 
         </com.andexert.library.RippleView>
