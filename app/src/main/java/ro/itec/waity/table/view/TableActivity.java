@@ -135,6 +135,7 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
       Intent intent = new Intent(this, OrderActivityView.class);
       intent.putExtra("ID", id);
       startActivity(intent);
+      finish();
    }
 
    /**
