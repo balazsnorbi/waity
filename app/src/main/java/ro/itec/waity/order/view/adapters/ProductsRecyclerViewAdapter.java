@@ -1,4 +1,4 @@
-package ro.itec.waity.order.view;
+package ro.itec.waity.order.view.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,7 @@ import java.util.LinkedList;
 
 import ro.itec.waity.R;
 import ro.itec.waity.api.model.Produse;
+import ro.itec.waity.order.view.listeners.OnProductAddListener;
 
 public class ProductsRecyclerViewAdapter
         extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductViewHolder>{

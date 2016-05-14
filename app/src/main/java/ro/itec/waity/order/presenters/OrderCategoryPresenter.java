@@ -152,6 +152,6 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
     @Override
     public void checkoutTempOrder() {
         view.showProgressBar();
-        subscriptions.add(model.checkoutTempOrder());
+        //subscriptions.add(model.checkoutTempOrder());
     }
 }

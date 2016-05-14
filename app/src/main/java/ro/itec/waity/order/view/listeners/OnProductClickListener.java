@@ -1,4 +1,4 @@
-package ro.itec.waity.order.view;
+package ro.itec.waity.order.view.listeners;
 
 import ro.itec.waity.api.model.Category;
 

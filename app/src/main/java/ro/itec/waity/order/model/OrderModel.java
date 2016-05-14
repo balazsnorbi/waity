@@ -45,7 +45,7 @@ public class OrderModel implements OrderMVP.ProvidedModelOps {
         return Observable.create(new Observable.OnSubscribe<Void>() {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
-                List<OrderBody> orderBodies = new LinkedList<OrderBody>();
+                List<OrderBody> orderBodies = new LinkedList<>();
                 List<TemporaryProduct> temporaryProducts
                         = TemporaryOrderMgr.INSTANCE.getTemporaryProductsList();
                 for (TemporaryProduct product : temporaryProducts) {

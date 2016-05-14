@@ -27,15 +27,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.itec.waity.R;
-import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
+import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.order.OrderMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrderCategoryPresenter;
+import ro.itec.waity.order.view.adapters.CategoriesRecyclerViewAdapter;
+import ro.itec.waity.order.view.adapters.ProductsRecyclerViewAdapter;
+import ro.itec.waity.order.view.listeners.OnAddProductListener;
+import ro.itec.waity.order.view.listeners.OnBackPressedListener;
+import ro.itec.waity.order.view.listeners.OnProductAddListener;
+import ro.itec.waity.order.view.listeners.OnProductClickListener;
 
 public class ProductsFragment extends Fragment
         implements OrderMVP.RequiredViewOps, OnProductClickListener, OnProductAddListener,
-        OnAddProductListener {
+        OnAddProductListener, OnBackPressedListener {
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
     @BindView(R.id.pb_products_progressBar)
@@ -67,30 +73,16 @@ public class ProductsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         presenter = new OrderCategoryPresenter(this, new OrderModel());
 
-        initProducts(view);
+        initCategories(view);
     }
 
-    private void initProducts(View view) {
+    private void initCategories(View view) {
         itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
 
-        int columnsPerLine = 2;
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            columnsPerLine = 2;
-        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            columnsPerLine = 3;
-        }
-
-        itemsRecyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(columnsPerLine, LinearLayoutManager.VERTICAL));
         itemsRecyclerView.addItemDecoration(
                 new ListSpacingDecoration(getContext(), R.dimen.item_offset));
 
-        categories = new LinkedList<>();
-        categoriesAdapter = new CategoriesRecyclerViewAdapter(categories, this, getContext());
-        itemsRecyclerView.setAdapter(categoriesAdapter);
-
-        presenter.fetchCategories();
+        switchToCategoryPerspective();
     }
 
     @OnClick(R.id.fb_product_checkout)
@@ -110,7 +102,7 @@ public class ProductsFragment extends Fragment
             public void run() {
                 progressBar.setVisibility(View.INVISIBLE);
             }
-        }, 3000);
+        }, 1000);
 
     }
 
@@ -124,6 +116,25 @@ public class ProductsFragment extends Fragment
     public void addProduct(Produse product) {
         this.products.add(product);
         productsAdapter.notifyItemInserted(products.size());
+    }
+
+    private void switchToCategoryPerspective() {
+        int columnsPerLine = 2;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            columnsPerLine = 2;
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            columnsPerLine = 3;
+        }
+
+        itemsRecyclerView.setLayoutManager(
+                new StaggeredGridLayoutManager(columnsPerLine, LinearLayoutManager.VERTICAL));
+
+        categories = new LinkedList<>();
+        categoriesAdapter = new CategoriesRecyclerViewAdapter(categories, this, getContext());
+        itemsRecyclerView.setAdapter(categoriesAdapter);
+
+        presenter.fetchCategories();
     }
 
     @Override
@@ -163,6 +174,16 @@ public class ProductsFragment extends Fragment
     @Override
     public void addProductOrder(Produse product, Integer quantity, String extra) {
         presenter.addTempProductOrder(product, quantity, extra);
+    }
+
+    @Override
+    public boolean doBack() {
+        if (isProductsPerspective) {
+            isProductsPerspective = false;
+            switchToCategoryPerspective();
+            return true;
+        }
+        return false;
     }
 
     public static class AddProductDialogFragment extends DialogFragment {

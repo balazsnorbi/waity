@@ -10,41 +10,53 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/tv_dialog_product_add_quantity"
+    <LinearLayout
+        android:id="@+id/ll_dialog_product_add_quantity_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_dialog_product_add_picture"
-        android:layout_margin="10dp"
-        android:layout_marginTop="30dp"
-        android:text="Quantity"
-        android:textColor="@android:color/white" />
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/et_dialog_product_add_quantity"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
-        android:layout_below="@id/iv_dialog_product_add_picture"
-        android:layout_margin="10dp"
-        android:layout_toRightOf="@id/tv_dialog_product_add_quantity"
-        android:backgroundTint="@android:color/white"
-        android:digits="123456789"
-        android:inputType="number"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textCursorDrawable="@null" />
+        <TextView
+            android:id="@+id/tv_dialog_product_add_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_dialog_product_add_picture"
+            android:layout_margin="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Quantity"
+            android:textColor="@android:color/white" />
 
+        <EditText
+            android:id="@+id/et_dialog_product_add_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_dialog_product_add_picture"
+            android:layout_margin="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tv_dialog_product_add_quantity"
+            android:backgroundTint="@android:color/white"
+            android:digits="123456789"
+            android:inputType="number"
+            android:maxLength="2"
+            android:minEms="2"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@null" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/et_dialog_product_add_extra"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/et_dialog_product_add_quantity"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_dialog_product_add_quantity_container"
         android:layout_margin="10dp"
         android:backgroundTint="@android:color/white"
         android:hint="Add some extra details for your order."
         android:inputType="text"
         android:paddingTop="30dp"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         android:textCursorDrawable="@null"
         android:textSize="14sp" />

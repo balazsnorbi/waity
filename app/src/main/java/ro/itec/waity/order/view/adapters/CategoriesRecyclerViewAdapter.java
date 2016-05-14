@@ -1,4 +1,4 @@
-package ro.itec.waity.order.view;
+package ro.itec.waity.order.view.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,6 +19,7 @@ import java.util.Random;
 
 import ro.itec.waity.R;
 import ro.itec.waity.api.model.Category;
+import ro.itec.waity.order.view.listeners.OnProductClickListener;
 
 public class CategoriesRecyclerViewAdapter
         extends RecyclerView.Adapter<CategoriesRecyclerViewAdapter.CategoryViewHolder> {
