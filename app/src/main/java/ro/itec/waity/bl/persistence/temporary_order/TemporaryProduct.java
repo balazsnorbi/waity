@@ -6,6 +6,7 @@ public class TemporaryProduct extends SugarRecord{
    public Integer productId;
    public Integer quantity;
    public String extra;
+   public String description;
 
    public TemporaryProduct() {}
 
@@ -13,5 +14,12 @@ public class TemporaryProduct extends SugarRecord{
       this.productId = product_id;
       this.quantity = quantity;
       this.extra = extra;
+   }
+
+   public TemporaryProduct(Integer product_id, Integer quantity, String extra, String description) {
+      this.productId = product_id;
+      this.quantity = quantity;
+      this.extra = extra;
+      this.description = description;
    }
 }

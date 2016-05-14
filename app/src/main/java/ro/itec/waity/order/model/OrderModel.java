@@ -35,7 +35,7 @@ public class OrderModel implements OrderMVP.ProvidedModelOps {
         return Observable.create(new Observable.OnSubscribe<Void>() {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
-                TemporaryOrderMgr.INSTANCE.addProductToOrder(product.getId(), quantity, extra);
+                TemporaryOrderMgr.INSTANCE.addProductToOrder(product.getId(), product.getDescription(), quantity, extra);
                 subscriber.onCompleted();
             }
         });
