@@ -161,7 +161,6 @@ public class ProductsFragment extends Fragment
         return false;
     }
 
-
     @Override
     public void showFloatingCheckout() {
         fbCheckout.setVisibility(View.VISIBLE);

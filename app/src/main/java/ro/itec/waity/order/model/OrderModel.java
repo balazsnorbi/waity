@@ -4,11 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ro.itec.waity.api.ApiServiceManager;
-import ro.itec.waity.api.model.OrderBody;
-import ro.itec.waity.api.model.ProductsResponse;
-import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
+import ro.itec.waity.api.model.OrderBody;
+import ro.itec.waity.api.model.PlaceOrderResponse;
+import ro.itec.waity.api.model.ProductsResponse;
+import ro.itec.waity.api.model.Produse;
 import ro.itec.waity.bl.persistence.temporary_order.TemporaryOrderMgr;
 import ro.itec.waity.bl.persistence.temporary_order.TemporaryProduct;
 import ro.itec.waity.bl.shared_preferences.KeyList;
@@ -42,24 +43,17 @@ public class OrderModel implements OrderMVP.ProvidedModelOps {
     }
 
     @Override
-    public Observable<Void> checkoutTempOrder() {
-        return Observable.create(new Observable.OnSubscribe<Void>() {
-            @Override
-            public void call(Subscriber<? super Void> subscriber) {
-                List<OrderBody> orderBodies = new LinkedList<>();
-                List<TemporaryProduct> temporaryProducts
-                        = TemporaryOrderMgr.INSTANCE.getTemporaryProductsList();
-                for (TemporaryProduct product : temporaryProducts) {
-                    orderBodies.add(new OrderBody(product.productId, product.quantity));
-                }
-                ApiServiceManager.getWaityApiService().addOrder(
-                        "application/json",
-                        PreferencesMgr.INSTANCE.readInt(KeyList.KEY_USER_ID),
-                        PreferencesMgr.INSTANCE.readInt(KeyList.KEY_DESK_ID),
-                        orderBodies);
-
-                subscriber.onCompleted();
-            }
-        });
+    public Observable<PlaceOrderResponse> checkoutTempOrder() {
+        List<OrderBody> orderBodies = new LinkedList<>();
+        List<TemporaryProduct> temporaryProducts
+                = TemporaryOrderMgr.INSTANCE.getTemporaryProductsList();
+        for (TemporaryProduct product : temporaryProducts) {
+            orderBodies.add(new OrderBody(product.productId, product.quantity));
+        }
+        return ApiServiceManager.getWaityApiService().addOrder(
+                "application/json",
+                PreferencesMgr.INSTANCE.readInt(KeyList.KEY_USER_ID),
+                PreferencesMgr.INSTANCE.readInt(KeyList.KEY_DESK_ID),
+                orderBodies);
     }
 }
