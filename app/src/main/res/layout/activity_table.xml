@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    tools:context="ro.itec.waity.table.view.TableActivity">
+    tools:context="ro.itec.waity.table.view.TableActivity"
+    android:background="@color/colorPrimaryDark">
 
     <ViewFlipper
         android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
 
         <include
             android:id="@+id/layout_nfc"
@@ -22,6 +24,7 @@
             layout="@layout/content_table_no_nfc"/>
 
     </ViewFlipper>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

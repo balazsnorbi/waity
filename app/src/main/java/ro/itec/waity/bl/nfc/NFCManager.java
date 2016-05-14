@@ -26,7 +26,7 @@ public enum NFCManager implements NFCEventListener{
    private static final String MIME_TEXT_PLAIN = "text/plain";
    private static final String TAG = "NFCManager";
    private static NfcAdapter adapter;
-   private static TableMVP.RequiredModelOperations model;
+   private static TableMVP.ModelOperations model;
    private final BroadcastReceiver nfcBroadcastReceiver = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
@@ -73,7 +73,7 @@ public enum NFCManager implements NFCEventListener{
       return succeeded;
    }
 
-   public final void setModel(TableMVP.RequiredModelOperations modelOperations) {
+   public final void setModel(TableMVP.ModelOperations modelOperations) {
       model = modelOperations;
    }
 

@@ -21,6 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.itec.waity.BuildConfig;
 import ro.itec.waity.R;
+import ro.itec.waity.bl.shared_preferences.KeyList;
+import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
 import ro.itec.waity.login.LoginMvp;
 import ro.itec.waity.login.model.LoginModel;
 import ro.itec.waity.login.presenter.LoginPresenter;
@@ -144,10 +146,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
     @Override
     public void authenticationCompleted(Integer userId) {
         Log.i(TAG, "authenticationCompleted: " + userId);
-
-        // TODO: set current user id
-
-//        startActivity(new Intent(this, OrderActivityView.class));
         startActivity(new Intent(this, TableActivity.class));
         finish();
     }
