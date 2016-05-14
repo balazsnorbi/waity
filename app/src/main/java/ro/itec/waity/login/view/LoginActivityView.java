@@ -19,11 +19,12 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ro.itec.waity.BuildConfig;
 import ro.itec.waity.R;
 import ro.itec.waity.login.LoginMvp;
 import ro.itec.waity.login.model.LoginModel;
 import ro.itec.waity.login.presenter.LoginPresenter;
-import ro.itec.waity.table.view.TableActivity;
+import ro.itec.waity.order.view.OrderActivityView;
 
 public class LoginActivityView extends AppCompatActivity implements LoginMvp.RequiredViewOps{
     private static final String TAG = LoginActivityView.class.getName();
@@ -59,7 +60,11 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
 
         presenter = new LoginPresenter(this, new LoginModel());
 
-        startActivity(new Intent(this, TableActivity.class));
+        // TODO: remove in prod
+        if (BuildConfig.DEBUG) {
+            etUsername.setText("c1@ligaac.ro");
+            etPassword.setText("parola1");
+        }
     }
 
     private void loadImages() {
@@ -137,7 +142,21 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
 
     @Override
     public void authenticationCompleted(Integer userId) {
-        Log.i(TAG, "authenticationCompleted: ");
+        Log.i(TAG, "authenticationCompleted: " + userId);
+
+        // TODO: set current user id
+
+        //TODO: check if nfc tag or qr code were scanned and start OrdersActivity
+
+
+        startActivity(new Intent(this, OrderActivityView.class));
+        finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progress.dismiss();
+        presenter.freeResources();
+    }
 }

@@ -30,7 +30,10 @@ public interface LoginMvp {
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface ProvidedPresenterOps {
+
         void login(String username, String password);
+
+        void freeResources();
     }
 
     /**

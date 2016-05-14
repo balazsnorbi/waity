@@ -60,6 +60,11 @@ public class LoginPresenter implements LoginMvp.ProvidedPresenterOps {
                 }));
     }
 
+    @Override
+    public void freeResources() {
+        subscriptions.unsubscribe();
+    }
+
     private void processResponse(UserResponse userResponse) {
         Log.i(TAG, "processResponse: " + userResponse.toString());
         if (userResponse.getStatus().equals("ok")) {
