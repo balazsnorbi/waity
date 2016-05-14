@@ -33,7 +33,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".table.view.TableActivity"
+            android:label="@string/title_activity_table"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
         </activity>
 
         <activity

@@ -23,7 +23,7 @@ import ro.itec.waity.R;
 import ro.itec.waity.login.LoginMvp;
 import ro.itec.waity.login.model.LoginModel;
 import ro.itec.waity.login.presenter.LoginPresenter;
-import ro.itec.waity.order.view.OrderActivityView;
+import ro.itec.waity.table.view.TableActivity;
 
 public class LoginActivityView extends AppCompatActivity implements LoginMvp.RequiredViewOps{
     private static final String TAG = LoginActivityView.class.getName();
@@ -58,6 +58,9 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
         setErrorIndicatorBounds();
 
         presenter = new LoginPresenter(this, new LoginModel());
+
+        // TODO: remove
+        startActivity(new Intent(this, TableActivity.class));
     }
 
     private void loadImages() {
@@ -125,6 +128,7 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
                 progress.dismiss();
             }
         }, delay);
+
     }
 
     @Override

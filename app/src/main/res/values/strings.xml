@@ -8,4 +8,5 @@
     <string name="nfc_alert_box_question">NFC can be used to scan your desk. Do you want to enable it? Of course, you can enable it later or you can use your QR code scanner instead.</string>
     <string name="nfc_alert_box_positive_btn">Turn On</string>
     <string name="nfc_alert_box_negative_btn">Close</string>
+    <string name="title_activity_table">TableActivity</string>
 </resources>
