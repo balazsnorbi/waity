@@ -98,18 +98,21 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     @Override
     public void addCategory(Category category) {
         this.categories.add(category);
-        categoriesAdapter.notifyItemInserted(categories.size());
+        categoriesAdapter.notifyItemInserted(categories.size() - 1);
     }
 
     @Override
     public void addProduct(Produse product) {
         this.products.add(product);
-        productsAdapter.notifyItemInserted(products.size());
+        productsAdapter.notifyItemInserted(products.size() - 1);
     }
 
     @Override
     public void switchToProductsPerspective() {
         Log.i(TAG, "switchToProductsPerspective: ");
+
+        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         products = new LinkedList<>();
         productsAdapter = new ProductsRecyclerViewAdapter(products, getContext());
         itemsRecyclerView.setAdapter(productsAdapter);
