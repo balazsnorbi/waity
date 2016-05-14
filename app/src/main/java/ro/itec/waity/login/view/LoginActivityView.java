@@ -130,7 +130,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
     @Override
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, OrderActivityView.class));
     }
 
     @Override
