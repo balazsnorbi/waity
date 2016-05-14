@@ -1,6 +1,6 @@
 package ro.itec.waity.app;
 
-import android.app.Application;
+import com.orm.SugarApp;
 
 import ro.itec.waity.bl.nfc.NFCManager;
 import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
@@ -8,7 +8,7 @@ import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
 /**
  * Created by Norbert on 5/13/2016.
  */
-public final class WaityApplication extends Application{
+public final class WaityApplication extends SugarApp{
 
    @Override
    public void onCreate() {
