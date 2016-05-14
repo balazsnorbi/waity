@@ -3,6 +3,7 @@ package ro.itec.waity.order.view;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ro.itec.waity.R;
 import ro.itec.waity.api.Produse;
 import ro.itec.waity.api.model.Category;
@@ -31,11 +33,15 @@ import ro.itec.waity.order.OrderMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrderCategoryPresenter;
 
-public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewOps, OnProductClickListener, OnProductAddListener {
+public class ProductsFragment extends Fragment
+        implements OrderMVP.RequiredViewOps, OnProductClickListener, OnProductAddListener,
+        OnAddProductListener {
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
     @BindView(R.id.pb_products_progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.fb_product_checkout)
+    FloatingActionButton fbCheckout;
 
     private OrderMVP.ProvidedPresenterOps presenter;
 
@@ -49,7 +55,8 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     private boolean isProductsPerspective = false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -85,6 +92,8 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
 
         presenter.fetchCategories();
     }
+
+    @OnClick(R.id.fb_product_checkout)
 
     @Override
     public void showProgressBar() {
@@ -129,6 +138,11 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     }
 
     @Override
+    public void showFloatingCheckout() {
+        fbCheckout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onClick(Category category) {
         Log.i(TAG, "onClick: " + category.getDescription());
         presenter.fetchProductsForCategory(category);
@@ -137,11 +151,22 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     @Override
     public void onProductAdd(Produse product) {
         // Create the fragment and show it as a dialog.
-        DialogFragment newFragment = AddProductDialogFragment.newInstance();
+        AddProductDialogFragment newFragment = AddProductDialogFragment.newInstance();
+        newFragment.setOnAddProductListener(this);
+        newFragment.setProduct(product);
         newFragment.show(getFragmentManager(), "dialog");
     }
 
+    @Override
+    public void addProductOrder(Produse product, Integer quantity, String extra) {
+        presenter.addTempProductOrder(product, quantity, extra);
+    }
+
     public static class AddProductDialogFragment extends DialogFragment {
+
+        private OnAddProductListener listener;
+
+        private Produse product;
 
         @BindView(R.id.iv_dialog_product_add_picture)
         ImageView ivPicture;
@@ -149,8 +174,6 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
         TextView tvQuantity;
         @BindView(R.id.et_dialog_product_add_quantity)
         EditText etQuantity;
-        @BindView(R.id.tv_dialog_product_add_extra)
-        TextView tvExtra;
         @BindView(R.id.et_dialog_product_add_extra)
         EditText etExtra;
 
@@ -171,6 +194,26 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
             super.onViewCreated(view, savedInstanceState);
             Glide.with(getContext()).load(R.drawable.burger).into(ivPicture);
         }
+
+        @OnClick(R.id.iv_dialog_product_add_cancel)
+        void onCancelClick() {
+            dismiss();
+        }
+
+        @OnClick(R.id.iv_dialog_product_add_proceed)
+        void onProceedClick() {
+            listener.addProductOrder(product, Integer.valueOf(etQuantity.getText().toString()),
+                    etExtra.getText().toString());
+        }
+
+        public void setProduct(Produse product) {
+            this.product = product;
+        }
+
+        public void setOnAddProductListener(OnAddProductListener onAddProductListener) {
+            this.listener = onAddProductListener;
+        }
+
     }
 
 }

@@ -27,25 +27,26 @@
         android:layout_below="@id/iv_dialog_product_add_picture"
         android:layout_margin="10dp"
         android:layout_toRightOf="@id/tv_dialog_product_add_quantity"
-        android:textColor="@android:color/white" />
+        android:backgroundTint="@android:color/white"
+        android:digits="123456789"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textCursorDrawable="@null" />
 
-    <TextView
-        android:id="@+id/tv_dialog_product_add_extra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_dialog_product_add_quantity"
-        android:layout_margin="10dp"
-        android:layout_marginTop="30dp"
-        android:text="Extra details" />
 
     <EditText
         android:id="@+id/et_dialog_product_add_extra"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@id/tv_dialog_product_add_extra"
-        android:layout_margin="5dp"
+        android:layout_below="@id/et_dialog_product_add_quantity"
+        android:layout_margin="10dp"
+        android:backgroundTint="@android:color/white"
         android:hint="Add some extra details for your order."
-        android:textColor="@android:color/white"
+        android:inputType="text"
+        android:paddingTop="30dp"
+        android:textColorHint="@android:color/white"
+        android:textCursorDrawable="@null"
         android:textSize="14sp" />
 
     <RelativeLayout
@@ -55,7 +56,7 @@
         android:layout_centerInParent="true">
 
         <ImageView
-            android:id="@+id/bt_dialog_product_add_proceed"
+            android:id="@+id/iv_dialog_product_add_proceed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -63,7 +64,7 @@
             android:src="@drawable/ic_remove_shopping_cart" />
 
         <ImageView
-            android:id="@+id/bt_dialog_product_add_remove"
+            android:id="@+id/iv_dialog_product_add_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
