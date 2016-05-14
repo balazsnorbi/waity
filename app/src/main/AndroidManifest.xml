@@ -47,6 +47,21 @@
             android:theme="@style/zxing_CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
+
+        //------------SUGAR OM CONFIGURATION------------//
+        <meta-data
+            android:name="DATABASE"
+            android:value="waity.db"/>
+        <meta-data
+            android:name="VERSION"
+            android:value="1"/>
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true"/>
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="ro.itec.waity"/>
+
     </application>
 
 </manifest>
