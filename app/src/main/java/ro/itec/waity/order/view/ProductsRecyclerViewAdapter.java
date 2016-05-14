@@ -21,7 +21,7 @@ import ro.itec.waity.R;
 import ro.itec.waity.api.model.Category;
 
 public class ProductsRecyclerViewAdapter
-        extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductViewHolder>{
+        extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductViewHolder> {
 
     private final List<Category> categories;
     private final Context context;
@@ -41,29 +41,25 @@ public class ProductsRecyclerViewAdapter
     @Override
     public void onBindViewHolder(final ProductViewHolder holder, int position) {
         Glide.with(context)
-                .load(categories.get(position).getImageSrcId())
+                //.load(categories.get(position).getImageSrcId())
+                .load(getRandomDrawable())
                 .asBitmap()
-                .placeholder(getRandomDrawable())
-                .listener(new RequestListener<String, Bitmap>() {
+                .listener(new RequestListener<Integer, Bitmap>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<Bitmap> target,
-                                               boolean isFirstResource) {
+                    public boolean onException(Exception e, Integer model, Target<Bitmap> target, boolean isFirstResource) {
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Bitmap resource, String model,
-                                                   Target<Bitmap> target,
-                                                   boolean isFromMemoryCache,
-                                                   boolean isFirstResource) {
+                    public boolean onResourceReady(Bitmap resource, Integer model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         Palette palette = Palette.from(resource).generate();
                         int default_value = 0xFFFFFF;
                         int vibrant = palette.getVibrantColor(default_value);
                         int muted = palette.getMutedColor(default_value);
 
-                        if (vibrant == default_value) {
+                        if (vibrant != default_value) {
                             holder.viewDescriptionBackground.setBackgroundColor(vibrant);
-                        } else {
+                        } else if (muted != default_value){
                             holder.viewDescriptionBackground.setBackgroundColor(muted);
                         }
                         return false;
@@ -75,7 +71,7 @@ public class ProductsRecyclerViewAdapter
 
     private int getRandomDrawable() {
         int minimum = 0;
-        int maximum = 3;
+        int maximum = 7;
         Random rand = new Random();
         int randomNum = minimum + rand.nextInt((maximum - minimum) + 1);
         switch (randomNum) {
@@ -87,6 +83,14 @@ public class ProductsRecyclerViewAdapter
                 return R.drawable.pasta;
             case 3:
                 return R.drawable.pizza;
+            case 4:
+                return R.drawable.burger;
+            case 5:
+                return R.drawable.vegetables;
+            case 6:
+                return R.drawable.pasta2;
+            case 7:
+                return R.drawable.takito;
         }
         return R.drawable.logo_red;
     }
@@ -96,7 +100,7 @@ public class ProductsRecyclerViewAdapter
         return categories.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder{
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView ivLogoImage;
         private final TextView tvDescription;
@@ -107,7 +111,7 @@ public class ProductsRecyclerViewAdapter
 
             this.ivLogoImage = (ImageView) itemView.findViewById(R.id.iv_category_logo);
             this.tvDescription = (TextView) itemView.findViewById(R.id.tv_category_description);
-            this.viewDescriptionBackground = (View) itemView.findViewById(R.id.view_description_background);
+            this.viewDescriptionBackground = itemView.findViewById(R.id.view_description_background);
         }
     }
 
