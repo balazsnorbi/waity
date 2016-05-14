@@ -24,6 +24,12 @@ public class TableModel implements TableMVP.ModelOperations {
     }
 
     @Override
+    public void checkForUser() {
+        int user = PreferencesMgr.INSTANCE.readInt(KeyList.KEY_USER_ID);
+        presenter.onUserDetected(user != 0, user);
+    }
+
+    @Override
     public boolean getNFCStatus() {
         return NFCManager.INSTANCE.isNFCEnabled();
     }

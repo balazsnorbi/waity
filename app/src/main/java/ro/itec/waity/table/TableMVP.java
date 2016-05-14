@@ -32,13 +32,36 @@ public class TableMVP {
          */
         void onNFCDecoded(boolean status, String result);
 
+       /**
+        * Table validation
+        * @param tableId Integer
+        */
         void tableValidated(Integer tableId);
+
+        /**
+         * The model callback for user check to Presenter
+         * @param detected boolean
+         * @param user User
+         */
+        void onUserDetected(boolean detected, int user);
     }
 
     /**
      * Methods offered by the presenter for the View and the Model
      */
     public interface PresenterOperations {
+
+       /**
+        * Called by the View who asks the presenter to check for the current user
+        */
+       void checkForCurrentUser();
+
+       /**
+        * The model callback for user check to Presenter
+        * @param detected boolean
+        * @param user User
+        */
+        void onUserDetected(boolean detected, int user);
 
         /**
          * Used to check for NFC status, a callback will be triggered
@@ -96,16 +119,28 @@ public class TableMVP {
          */
         void saveDeskID(int id);
 
+       /**
+        * Called when an ID was successfully scanned from a QR code
+        * @param id String
+        */
         void onIDObtainedFromQrCode(String id);
 
+       /**
+        * Called when the ID was successfully obtained from an NFC tag
+        * @param id
+        */
         void onIDObtainedFromNfc(String id);
-
     }
 
     /**
      * This interface contains all the methods offered by the model for the presenter
      */
     public interface ModelOperations {
+
+       /**
+        * This method is called by the presenter to order model to retrieve the current user if exists
+        */
+       void checkForUser();
 
         /**
          * Getter for NFC status
@@ -168,5 +203,7 @@ public class TableMVP {
         Observable<TableResponse> getTableIdFromQr(String id);
 
         Observable<TableResponse> getTableIdFromNfc(String id);
+
+
     }
 }

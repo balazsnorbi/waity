@@ -25,7 +25,17 @@ public class TablePresenter implements TableMVP.PresenterOperations {
         this.model = new TableModel(this);
     }
 
-    @Override
+   @Override
+   public void checkForCurrentUser() {
+      model.checkForUser();
+   }
+
+   @Override
+   public void onUserDetected(boolean detected, int user) {
+      view.onUserDetected(detected, user);
+   }
+
+   @Override
     public void checkForNFCStatus() {
         forwardNFCEventToView(model.getNFCStatus());
     }
