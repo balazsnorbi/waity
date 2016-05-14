@@ -14,7 +14,13 @@ public interface OrderMVP {
      * and receive user interactions
      */
     interface RequiredViewOps {
-        void addCategories(List<Category> categories);
+
+        void showProgressBar();
+
+        void hideProgressBar();
+
+        void addCategory(Category category);
+
     }
 
     /**

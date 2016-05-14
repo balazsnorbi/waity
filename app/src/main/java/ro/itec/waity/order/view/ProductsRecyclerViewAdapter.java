@@ -11,11 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Random;
 
 import ro.itec.waity.R;
 import ro.itec.waity.api.model.Category;
-
-import static android.view.LayoutInflater.from;
 
 public class ProductsRecyclerViewAdapter
         extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductViewHolder>{
@@ -32,17 +31,34 @@ public class ProductsRecyclerViewAdapter
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_item_view, parent, false);
-        ProductViewHolder viewHolder = new ProductViewHolder(view);
-        return viewHolder;
+        return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         Glide.with(context)
                 .load(categories.get(position).getImageSrcId())
-                .placeholder(R.color.colorPrimary)
+                .placeholder(getRandomDrawable())
                 .into(holder.ivLogoImage);
         holder.tvDescription.setText(categories.get(position).getDescription().trim());
+    }
+
+    private int getRandomDrawable() {
+        int minimum = 0;
+        int maximum = 3;
+        Random rand = new Random();
+        int randomNum = minimum + rand.nextInt((maximum - minimum) + 1);
+        switch (randomNum) {
+            case 0:
+                return R.drawable.banana;
+            case 1:
+                return R.drawable.food;
+            case 2:
+                return R.drawable.pasta;
+            case 3:
+                return R.drawable.pizza;
+        }
+        return R.drawable.logo_red;
     }
 
     @Override
