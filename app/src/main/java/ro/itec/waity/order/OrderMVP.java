@@ -5,6 +5,7 @@ import ro.itec.waity.api.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
 import rx.Observable;
+import rx.Subscription;
 
 public interface OrderMVP {
 
@@ -25,6 +26,8 @@ public interface OrderMVP {
 
         void switchToProductsPerspective();
 
+        void showFloatingCheckout();
+
     }
 
     /**
@@ -36,6 +39,8 @@ public interface OrderMVP {
         void fetchCategories();
 
         void fetchProductsForCategory(Category category);
+
+        void addTempProductOrder(Produse product, Integer quantity, String extra);
 
     }
 
@@ -54,6 +59,8 @@ public interface OrderMVP {
         Observable<CategoryResponse> getCategories();
 
         Observable<ProductsResponse> getProductsForCategory(Category category);
+
+        Observable<Void> addTempProductOrder(Produse product, Integer quantity, String extra);
 
     }
 

@@ -121,4 +121,31 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
                     }
                 }));
     }
+
+    @Override
+    public void addTempProductOrder(Produse product, Integer quantity, String extra) {
+        view.showProgressBar();
+        subscriptions.add(model.addTempProductOrder(product, quantity, extra)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i(TAG, "onCompleted: ");
+                        view.hideProgressBar();
+                        view.showFloatingCheckout();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                        view.hideProgressBar();
+                    }
+
+                    @Override
+                    public void onNext(Void Void) {
+                        Log.d(TAG, "onNext: ");
+                    }
+                }));
+    }
 }
