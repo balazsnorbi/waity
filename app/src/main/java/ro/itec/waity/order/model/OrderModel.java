@@ -36,6 +36,7 @@ public class OrderModel implements OrderMVP.ProvidedModelOps {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
                 TemporaryOrderMgr.INSTANCE.addProductToOrder(product.getId(), quantity, extra);
+                subscriber.onCompleted();
             }
         });
     }
@@ -56,6 +57,8 @@ public class OrderModel implements OrderMVP.ProvidedModelOps {
                         PreferencesMgr.INSTANCE.readInt(KeyList.KEY_USER_ID),
                         PreferencesMgr.INSTANCE.readInt(KeyList.KEY_DESK_ID),
                         orderBodies);
+
+                subscriber.onCompleted();
             }
         });
     }
