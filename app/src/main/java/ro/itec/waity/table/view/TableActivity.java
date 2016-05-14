@@ -1,6 +1,11 @@
 package ro.itec.waity.table.view;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
@@ -63,6 +68,7 @@ public class TableActivity extends AppCompatActivity implements TableMVP.ViewOpe
       presenter.setupForegroundDispatch(this);
       presenter.checkForNFCStatus();
       presenter.registerForNFCChangeEvent(this, true);
+      checkInternetConnection();
    }
 
    @Override
@@ -104,6 +110,7 @@ public class TableActivity extends AppCompatActivity implements TableMVP.ViewOpe
    @Override
    protected void onNewIntent(Intent intent) {
       super.onNewIntent(intent);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       presenter.handleNewIntent(intent);
    }
 
@@ -159,6 +166,23 @@ public class TableActivity extends AppCompatActivity implements TableMVP.ViewOpe
          getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
       } else {
          getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+      }
+   }
+
+   private void checkInternetConnection() {
+      ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+      NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+      if (!(activeNetworkInfo != null && activeNetworkInfo.isConnected())) {
+         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+         builder.setTitle(R.string.alert_no_internet_title);
+         builder.setMessage(R.string.alert_no_internet_message);
+         builder.setPositiveButton(R.string.alert_no_internet_positive_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+            }
+         });
+         builder.create().show();
       }
    }
 }

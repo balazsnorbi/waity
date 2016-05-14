@@ -12,4 +12,9 @@
     <string name="approach_your_nfc_tag">Approach your NFC tag...</string>
     <string name="or_read_the_qr_code">...or scan the QR code!</string>
     <string name="nfc_is_off_to_activate_it_press_the_symbol_below">NFC is off. To activate it, press the symbol below.</string>
+    <string name="alert_no_internet_title">Oups!</string>
+    <string name="alert_no_internet_message">There is no internet connection, please connect to an internet network!</string>
+    <string name="alert_no_internet_positive_button">Ok</string>
+    <string name="login_activity_progress_title">Authenticating</string>
+    <string name="login_activity_progress_message">Checking password and username ...</string>
 </resources>
