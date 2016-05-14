@@ -1,6 +1,8 @@
 package ro.itec.waity.order.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 import java.util.Random;
@@ -35,10 +39,36 @@ public class ProductsRecyclerViewAdapter
     }
 
     @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
+    public void onBindViewHolder(final ProductViewHolder holder, int position) {
         Glide.with(context)
                 .load(categories.get(position).getImageSrcId())
+                .asBitmap()
                 .placeholder(getRandomDrawable())
+                .listener(new RequestListener<String, Bitmap>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<Bitmap> target,
+                                               boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, String model,
+                                                   Target<Bitmap> target,
+                                                   boolean isFromMemoryCache,
+                                                   boolean isFirstResource) {
+                        Palette palette = Palette.from(resource).generate();
+                        int default_value = 0xFFFFFF;
+                        int vibrant = palette.getVibrantColor(default_value);
+                        int muted = palette.getMutedColor(default_value);
+
+                        if (vibrant == default_value) {
+                            holder.viewDescriptionBackground.setBackgroundColor(vibrant);
+                        } else {
+                            holder.viewDescriptionBackground.setBackgroundColor(muted);
+                        }
+                        return false;
+                    }
+                })
                 .into(holder.ivLogoImage);
         holder.tvDescription.setText(categories.get(position).getDescription().trim());
     }
@@ -70,12 +100,14 @@ public class ProductsRecyclerViewAdapter
 
         private final ImageView ivLogoImage;
         private final TextView tvDescription;
+        private final View viewDescriptionBackground;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
 
             this.ivLogoImage = (ImageView) itemView.findViewById(R.id.iv_category_logo);
             this.tvDescription = (TextView) itemView.findViewById(R.id.tv_category_description);
+            this.viewDescriptionBackground = (View) itemView.findViewById(R.id.view_description_background);
         }
     }
 
