@@ -25,6 +25,7 @@ import ro.itec.waity.login.LoginMvp;
 import ro.itec.waity.login.model.LoginModel;
 import ro.itec.waity.login.presenter.LoginPresenter;
 import ro.itec.waity.order.view.OrderActivityView;
+import ro.itec.waity.table.view.TableActivity;
 
 public class LoginActivityView extends AppCompatActivity implements LoginMvp.RequiredViewOps{
     private static final String TAG = LoginActivityView.class.getName();
@@ -146,10 +147,8 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
 
         // TODO: set current user id
 
-        //TODO: check if nfc tag or qr code were scanned and start OrdersActivity
-
-
-        startActivity(new Intent(this, OrderActivityView.class));
+//        startActivity(new Intent(this, OrderActivityView.class));
+        startActivity(new Intent(this, TableActivity.class));
         finish();
     }
 

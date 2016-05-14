@@ -18,6 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.itec.waity.R;
+import ro.itec.waity.order.view.OrderActivityView;
 import ro.itec.waity.table.TableMVP;
 import ro.itec.waity.table.presenter.TablePresenter;
 
@@ -65,7 +66,7 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
             } else {
                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                String result = scanResult.getContents();
-               Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+               onIDObtained(result);
             }
             break;
          default:
@@ -94,6 +95,13 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
             firstShown = false;
          }
       }
+   }
+
+   private void onIDObtained(String id) {
+      Intent intent = new Intent(this, OrderActivityView.class);
+      intent.putExtra("ID", id);
+      startActivity(intent);
+      finish();
    }
 
    /**
