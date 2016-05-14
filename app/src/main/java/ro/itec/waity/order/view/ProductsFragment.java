@@ -149,8 +149,6 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
         TextView tvQuantity;
         @BindView(R.id.et_dialog_product_add_quantity)
         EditText etQuantity;
-        @BindView(R.id.tv_dialog_product_add_extra)
-        TextView tvExtra;
         @BindView(R.id.et_dialog_product_add_extra)
         EditText etExtra;
 
