@@ -65,7 +65,12 @@ public class LoginPresenter implements LoginMvp.ProvidedPresenterOps {
         subscriptions.unsubscribe();
     }
 
-    private void processResponse(UserResponse userResponse) {
+   @Override
+   public void saveUserID(int userID) {
+      model.saveUserID(userID);
+   }
+
+   private void processResponse(UserResponse userResponse) {
         Log.i(TAG, "processResponse: " + userResponse.toString());
         if (userResponse.getStatus().equals("ok")) {
             view.authenticationCompleted(userResponse.getUserId());

@@ -9,12 +9,12 @@ import ro.itec.waity.table.model.TableModel;
 /**
  * Created by Norbert on 5/14/2016.
  */
-public class TablePresenter implements TableMVP.RequiredPresenterOperations{
+public class TablePresenter implements TableMVP.PresenterOperations {
 
-   private final TableMVP.RequiredViewOperations view;
-   private final TableMVP.RequiredModelOperations model;
+   private final TableMVP.ViewOperations view;
+   private final TableMVP.ModelOperations model;
 
-   public TablePresenter(TableMVP.RequiredViewOperations view) {
+   public TablePresenter(TableMVP.ViewOperations view) {
       this.view = view;
       this.model = new TableModel(this);
    }
@@ -52,6 +52,11 @@ public class TablePresenter implements TableMVP.RequiredPresenterOperations{
    @Override
    public void onNFCDecoded(boolean status, String result) {
       view.onNFCDecoded(status, result);
+   }
+
+   @Override
+   public void saveDeskID(String id) {
+      model.saveDeskID(id);
    }
 
    private void forwardNFCEventToView(boolean nfcStatus) {

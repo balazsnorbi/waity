@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -26,13 +25,13 @@ import ro.itec.waity.table.presenter.TablePresenter;
 /**
  * This activity is used to read NFC tags and QR Codes
  */
-public class TableActivity extends AppCompatActivity implements TableMVP.RequiredViewOperations {
+public class TableActivity extends AppCompatActivity implements TableMVP.ViewOperations {
 
    @BindView(R.id.viewFlipper)
    protected ViewFlipper viewFlipper;
    @BindView(R.id.rippleView)
    protected RippleView rippleView;
-   private TableMVP.RequiredPresenterOperations presenter;
+   private TableMVP.PresenterOperations presenter;
    private boolean firstShown = true;
 
    @Override
@@ -129,9 +128,10 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
 
    /**
     * Exit point of the activity. When the table ID is obtained, we can forward the user to the OrderActivity
-    * @param id
+    * @param id String
     */
    private void onIDObtained(String id) {
+      presenter.saveDeskID(id);
       Intent intent = new Intent(this, OrderActivityView.class);
       intent.putExtra("ID", id);
       startActivity(intent);

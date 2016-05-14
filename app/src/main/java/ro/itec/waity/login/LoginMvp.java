@@ -34,6 +34,8 @@ public interface LoginMvp {
         void login(String username, String password);
 
         void freeResources();
+
+        void saveUserID(int userID);
     }
 
     /**
@@ -47,7 +49,10 @@ public interface LoginMvp {
      * Handles all data business logic.
      */
     interface ProvidedModelOps {
+
         Observable<UserResponse> getUser(String email, String password);
+
+        void saveUserID(int userID);
     }
 
 }
