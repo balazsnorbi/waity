@@ -27,6 +27,7 @@ public interface OrderMVP {
 
         void showFloatingCheckout();
 
+        void hideFloatingCheckout();
     }
 
     /**

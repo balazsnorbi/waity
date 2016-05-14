@@ -168,6 +168,11 @@ public class ProductsFragment extends Fragment
     }
 
     @Override
+    public void hideFloatingCheckout() {
+        fbCheckout.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public void onClick(Category category) {
         Log.i(TAG, "onClick: " + category.getDescription());
         presenter.fetchProductsForCategory(category);

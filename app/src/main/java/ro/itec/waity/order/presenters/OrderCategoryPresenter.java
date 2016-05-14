@@ -152,6 +152,27 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
     @Override
     public void checkoutTempOrder() {
         view.showProgressBar();
-        //subscriptions.add(model.checkoutTempOrder());
+        subscriptions.add(model.checkoutTempOrder()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i(TAG, "onCompleted: ");
+                        view.hideProgressBar();
+                        view.hideFloatingCheckout();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                        view.hideProgressBar();
+                    }
+
+                    @Override
+                    public void onNext(Void Void) {
+                        Log.d(TAG, "onNext: ");
+                    }
+                }));
     }
 }

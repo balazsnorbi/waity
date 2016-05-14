@@ -13,6 +13,7 @@ import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.api.model.OrderBody;
 import ro.itec.waity.api.model.OrderResponse;
 import ro.itec.waity.api.model.ProductsResponse;
+import ro.itec.waity.api.model.TableResponse;
 import ro.itec.waity.api.model.UserResponse;
 import rx.Observable;
 
@@ -34,5 +35,14 @@ public interface WaityApiService {
                                        @Path("userId") Integer userId,
                                        @Path("tableId") Integer tableId,
                                        @Body List<OrderBody> orders);
+
+    @FormUrlEncoded
+    @POST("table")
+    Observable<TableResponse> getTableIdFromQr(@Field("qr") String id);
+
+    @FormUrlEncoded
+    @POST("table")
+    Observable<TableResponse> getTableIdFromNfc(@Field("nfc") String id);
+
 
 }

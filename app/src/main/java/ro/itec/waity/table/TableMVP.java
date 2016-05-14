@@ -3,138 +3,170 @@ package ro.itec.waity.table;
 import android.app.Activity;
 import android.content.Intent;
 
+import ro.itec.waity.api.model.TableResponse;
+import rx.Observable;
+import rx.Subscription;
+
 /**
  * Created by Norbert on 5/13/2016.
  */
 public class TableMVP {
 
-   /**
-    * Public methods offered by the view for the presenter
-    */
-   public interface ViewOperations {
+    /**
+     * Public methods offered by the view for the presenter
+     */
+    public interface ViewOperations {
 
-      /**
-       * Called when the NFC status has been updated
-       * @param status boolean true-on false-off
-       */
-      void nfcStatusEvent(boolean status);
+        /**
+         * Called when the NFC status has been updated
+         *
+         * @param status boolean true-on false-off
+         */
+        void nfcStatusEvent(boolean status);
 
-      /**
-       * This is called by the presenter when the NFC tag was red
-       * @param status Success status
-       * @param result Tag
-       */
-      void onNFCDecoded(boolean status, String result);
-   }
+        /**
+         * This is called by the presenter when the NFC tag was red
+         *
+         * @param status Success status
+         * @param result Tag
+         */
+        void onNFCDecoded(boolean status, String result);
 
-   /**
-    * Methods offered by the presenter for the View and the Model
-    */
-   public interface PresenterOperations {
+        void tableValidated(Integer tableId);
+    }
 
-      /**
-       * Used to check for NFC status, a callback will be triggered
-       */
-      void checkForNFCStatus();
+    /**
+     * Methods offered by the presenter for the View and the Model
+     */
+    public interface PresenterOperations {
 
-      /**
-       * Blocks the given activity from running multiple instances
-       * @param activity Activity
-       */
-      void setupForegroundDispatch(Activity activity);
+        /**
+         * Used to check for NFC status, a callback will be triggered
+         */
+        void checkForNFCStatus();
 
-      /**
-       * Allows activity to run multiple instances
-       * @param activity Activity
-       */
-      void stopForegroundDispatch(Activity activity);
+        /**
+         * Blocks the given activity from running multiple instances
+         *
+         * @param activity Activity
+         */
+        void setupForegroundDispatch(Activity activity);
 
-      /**
-       * The activity given will listen as a broadcast receiver for the NFC change event from system
-       * @param activity Activity
-       * @param register ON/OFF
-       */
-      void registerForNFCChangeEvent(Activity activity, boolean register);
+        /**
+         * Allows activity to run multiple instances
+         *
+         * @param activity Activity
+         */
+        void stopForegroundDispatch(Activity activity);
 
-      /**
-       * Notification callback with NFC value
-       * @param status boolean
-       */
-      void notifyNFCEvent(boolean status);
+        /**
+         * The activity given will listen as a broadcast receiver for the NFC change event from system
+         *
+         * @param activity Activity
+         * @param register ON/OFF
+         */
+        void registerForNFCChangeEvent(Activity activity, boolean register);
 
-      /**
-       * Called when an Activity receives a new intent -> maybe a new NFC tag was red?
-       * @param intent Intent
-       */
-      void handleNewIntent(Intent intent);
+        /**
+         * Notification callback with NFC value
+         *
+         * @param status boolean
+         */
+        void notifyNFCEvent(boolean status);
 
-      /**
-       * Called by the model when the NFC tag was decoded
-       * @param status boolean (succeeded?)
-       * @param result String
-       */
-      void onNFCDecoded(boolean status, String result);
+        /**
+         * Called when an Activity receives a new intent -> maybe a new NFC tag was red?
+         *
+         * @param intent Intent
+         */
+        void handleNewIntent(Intent intent);
 
-      /**
-       * Order to save the desk ID as a shared preferences
-       * @param id String
-       */
-      void saveDeskID(String id);
-   }
+        /**
+         * Called by the model when the NFC tag was decoded
+         *
+         * @param status boolean (succeeded?)
+         * @param result String
+         */
+        void onNFCDecoded(boolean status, String result);
 
-   /**
-    * This interface contains all the methods offered by the model for the presenter
-    */
-   public interface ModelOperations {
+        /**
+         * Order to save the desk ID as a shared preferences
+         *
+         * @param id String
+         */
+        void saveDeskID(int id);
 
-      /**
-       * Getter for NFC status
-       * @return boolean NFC on / off
-       */
-      boolean getNFCStatus();
+        void onIDObtainedFromQrCode(String id);
 
-      /**
-       * Blocks the given activity from running multiple instances
-       * @param activity Activity
-       */
-      void setupForegroundDispatch(Activity activity);
+        void onIDObtainedFromNfc(String id);
 
-      /**
-       * Allows activity to run multiple instances
-       * @param activity Activity
-       */
-      void stopForegroundDispatch(Activity activity);
+    }
 
-      /**
-       * The activity given will listen as a broadcast receiver for the NFC change event from system
-       * @param activity Activity
-       * @param register ON/OFF
-       */
-      void registerForNFCChangeEvent(Activity activity, boolean register);
+    /**
+     * This interface contains all the methods offered by the model for the presenter
+     */
+    public interface ModelOperations {
 
-      /**
-       * Triggers a new NFC event
-       * @param newNfcStatus boolean NFC Status on/off
-       */
-      void notifyNFCEvent(boolean newNfcStatus);
+        /**
+         * Getter for NFC status
+         *
+         * @return boolean NFC on / off
+         */
+        boolean getNFCStatus();
 
-      /**
-       * Called when an Activity receives a new intent -> maybe a new NFC tag was red?
-       * @param intent Intent
-       */
-      void handleNewIntent(Intent intent);
+        /**
+         * Blocks the given activity from running multiple instances
+         *
+         * @param activity Activity
+         */
+        void setupForegroundDispatch(Activity activity);
 
-      /**
-       * Called by the model when the NFC tag was decoded
-       * @param status boolean (succeeded?)
-       * @param result String
-       */
-      void onNFCDecoded(boolean status, String result);
+        /**
+         * Allows activity to run multiple instances
+         *
+         * @param activity Activity
+         */
+        void stopForegroundDispatch(Activity activity);
 
-      /**
-       * Order to save the desk ID as a shared preferences
-       * @param id String
-       */
-      void saveDeskID(String id);
-   }
+        /**
+         * The activity given will listen as a broadcast receiver for the NFC change event from system
+         *
+         * @param activity Activity
+         * @param register ON/OFF
+         */
+        void registerForNFCChangeEvent(Activity activity, boolean register);
+
+        /**
+         * Triggers a new NFC event
+         *
+         * @param newNfcStatus boolean NFC Status on/off
+         */
+        void notifyNFCEvent(boolean newNfcStatus);
+
+        /**
+         * Called when an Activity receives a new intent -> maybe a new NFC tag was red?
+         *
+         * @param intent Intent
+         */
+        void handleNewIntent(Intent intent);
+
+        /**
+         * Called by the model when the NFC tag was decoded
+         *
+         * @param status boolean (succeeded?)
+         * @param result String
+         */
+        void onNFCDecoded(boolean status, String result);
+
+        /**
+         * Order to save the desk ID as a shared preferences
+         *
+         * @param id String
+         */
+        void saveDeskID(int id);
+
+        Observable<TableResponse> getTableIdFromQr(String id);
+
+        Observable<TableResponse> getTableIdFromNfc(String id);
+    }
 }
