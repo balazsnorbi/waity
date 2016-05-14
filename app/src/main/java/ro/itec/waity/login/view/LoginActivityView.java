@@ -58,6 +58,8 @@ public class LoginActivityView extends AppCompatActivity implements LoginMvp.Req
         setErrorIndicatorBounds();
 
         presenter = new LoginPresenter(this, new LoginModel());
+
+        startActivity(new Intent(this, TableActivity.class));
     }
 
     private void loadImages() {

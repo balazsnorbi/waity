@@ -10,4 +10,5 @@ import ro.itec.waity.R;
 
 public class AnyOrientationCaptureActivity extends CaptureActivity {
 
+
 }

@@ -1,21 +1,16 @@
 package ro.itec.waity.table.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
-import com.google.zxing.ResultPoint;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.journeyapps.barcodescanner.BarcodeCallback;
-import com.journeyapps.barcodescanner.BarcodeResult;
+import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
-import com.journeyapps.barcodescanner.CompoundBarcodeView;
 
-import java.util.List;
-
-import butterknife.BindView;
 import ro.itec.waity.R;
 
 public class TableActivity extends CaptureActivity{
@@ -37,6 +32,23 @@ public class TableActivity extends CaptureActivity{
             integrator.initiateScan();
          }
       });
+   }
+
+   @Override
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      switch (requestCode) {
+         case IntentIntegrator.REQUEST_CODE:
+            if (resultCode == RESULT_CANCELED) {
+
+            } else {
+               IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+               String result = scanResult.getContents();
+               Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            }
+            break;
+         default:
+            break;
+      }
    }
 
    protected void setStatusBarTranslucent(boolean makeTranslucent) {
