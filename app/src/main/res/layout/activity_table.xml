@@ -8,8 +8,20 @@
     android:fitsSystemWindows="true"
     tools:context="ro.itec.waity.table.view.TableActivity">
 
-    <include layout="@layout/content_table"/>
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/layout_nfc"
+            layout="@layout/content_table_nfc"/>
+
+        <include
+            android:id="@+id/layout_no_nfc"
+            layout="@layout/content_table_no_nfc"/>
+
+    </ViewFlipper>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

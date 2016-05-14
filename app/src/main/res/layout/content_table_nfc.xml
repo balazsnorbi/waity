@@ -14,12 +14,38 @@
     tools:showIn="@layout/activity_table"
     android:background="@color/colorPrimaryDark">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="12">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="@string/approach_your_nfc_tag"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:scaleType="centerInside"
         android:src="@drawable/nfc"
         android:tint="@color/white"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="@string/or_read_the_qr_code"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

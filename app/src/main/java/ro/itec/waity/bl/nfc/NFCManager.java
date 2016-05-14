@@ -141,4 +141,12 @@ public enum NFCManager {
 
       return nfcIsEnabled;
    }
+
+   /**
+    * Getter method to check NFC status
+    * @return nfcStatus
+    */
+   public final boolean isNFCEnabled() {
+      return adapter.isEnabled();
+   }
 }
