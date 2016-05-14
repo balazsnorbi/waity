@@ -1,7 +1,7 @@
 package ro.itec.waity.order;
 
-import java.util.List;
-
+import ro.itec.waity.api.ProductsResponse;
+import ro.itec.waity.api.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
 import rx.Observable;
@@ -21,6 +21,10 @@ public interface OrderMVP {
 
         void addCategory(Category category);
 
+        void addProduct(Produse product);
+
+        void switchToProductsPerspective();
+
     }
 
     /**
@@ -28,7 +32,11 @@ public interface OrderMVP {
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface ProvidedPresenterOps {
+
         void fetchCategories();
+
+        void fetchProductsForCategory(Category category);
+
     }
 
     /**
@@ -42,7 +50,11 @@ public interface OrderMVP {
      * Handles all data business logic.
      */
     interface ProvidedModelOps {
+
         Observable<CategoryResponse> getCategories();
+
+        Observable<ProductsResponse> getProductsForCategory(Category category);
+
     }
 
 }

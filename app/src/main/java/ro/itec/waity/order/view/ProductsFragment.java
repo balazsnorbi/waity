@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +19,31 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.itec.waity.R;
+import ro.itec.waity.api.Produse;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.order.OrderMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrderCategoryPresenter;
 
-public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewOps {
+public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewOps, OnProductClickListener {
+    private static final String TAG = ProductsFragment.class.getSimpleName();
 
     @BindView(R.id.pb_products_progressBar)
     ProgressBar progressBar;
 
     private OrderMVP.ProvidedPresenterOps presenter;
 
+    private RecyclerView itemsRecyclerView;
+
     private List<Category> categories;
-    private ProductsRecyclerViewAdapter adapter;
+    private CategoriesRecyclerViewAdapter categoriesAdapter;
+
+    private LinkedList<Produse> products;
+    private ProductsRecyclerViewAdapter productsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_products, container, false);
+        View view = inflater.inflate(R.layout.fragment_products, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -49,7 +57,7 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     }
 
     private void initProducts(View view) {
-        RecyclerView productsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
+         itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
 
         int columnsPerLine = 2;
         int orientation = getResources().getConfiguration().orientation;
@@ -59,14 +67,14 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
             columnsPerLine = 3;
         }
 
-        productsRecyclerView.setLayoutManager(
+        itemsRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(columnsPerLine, LinearLayoutManager.VERTICAL));
-        productsRecyclerView.addItemDecoration(
+        itemsRecyclerView.addItemDecoration(
                 new ListSpacingDecoration(getContext(), R.dimen.item_offset));
 
         categories = new LinkedList<>();
-        adapter = new ProductsRecyclerViewAdapter(categories, getContext());
-        productsRecyclerView.setAdapter(adapter);
+        categoriesAdapter = new CategoriesRecyclerViewAdapter(categories, this, getContext());
+        itemsRecyclerView.setAdapter(categoriesAdapter);
 
         presenter.fetchCategories();
     }
@@ -90,6 +98,27 @@ public class ProductsFragment extends Fragment implements OrderMVP.RequiredViewO
     @Override
     public void addCategory(Category category) {
         this.categories.add(category);
-        adapter.notifyItemInserted(categories.size());
+        categoriesAdapter.notifyItemInserted(categories.size());
+    }
+
+    @Override
+    public void addProduct(Produse product) {
+        this.products.add(product);
+        productsAdapter.notifyItemInserted(products.size());
+    }
+
+    @Override
+    public void switchToProductsPerspective() {
+        Log.i(TAG, "switchToProductsPerspective: ");
+        products = new LinkedList<>();
+        productsAdapter = new ProductsRecyclerViewAdapter(products, getContext());
+        itemsRecyclerView.setAdapter(productsAdapter);
+        itemsRecyclerView.requestLayout();
+    }
+
+    @Override
+    public void onClick(Category category) {
+        Log.i(TAG, "onClick: " + category.getDescription());
+        presenter.fetchProductsForCategory(category);
     }
 }
