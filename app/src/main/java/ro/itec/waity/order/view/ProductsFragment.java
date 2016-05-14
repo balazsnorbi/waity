@@ -152,6 +152,17 @@ public class ProductsFragment extends Fragment
     }
 
     @Override
+    public boolean doBack() {
+        if (isProductsPerspective) {
+            isProductsPerspective = false;
+            switchToCategoryPerspective();
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
     public void showFloatingCheckout() {
         fbCheckout.setVisibility(View.VISIBLE);
     }
@@ -176,16 +187,6 @@ public class ProductsFragment extends Fragment
         presenter.addTempProductOrder(product, quantity, extra);
     }
 
-    @Override
-    public boolean doBack() {
-        if (isProductsPerspective) {
-            isProductsPerspective = false;
-            switchToCategoryPerspective();
-            return true;
-        }
-        return false;
-    }
-
     public static class AddProductDialogFragment extends DialogFragment {
 
         private OnAddProductListener listener;
@@ -200,6 +201,10 @@ public class ProductsFragment extends Fragment
         EditText etQuantity;
         @BindView(R.id.et_dialog_product_add_extra)
         EditText etExtra;
+        @BindView(R.id.iv_dialog_product_add_proceed)
+        ImageView ivProceed;
+        @BindView(R.id.iv_dialog_product_add_cancel)
+        ImageView ivCancel;
 
         static AddProductDialogFragment newInstance() {
             return new AddProductDialogFragment();
@@ -217,6 +222,8 @@ public class ProductsFragment extends Fragment
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             Glide.with(getContext()).load(R.drawable.burger).into(ivPicture);
+            Glide.with(getContext()).load(R.drawable.ic_remove_shopping_cart).into(ivCancel);
+            Glide.with(getContext()).load(R.drawable.ic_check).into(ivProceed);
         }
 
         @OnClick(R.id.iv_dialog_product_add_cancel)
