@@ -9,59 +9,47 @@ public class Category {
     @SerializedName("description")
     private String description;
     @SerializedName("image_src_id")
-    private Object imageSrcId;
+    private String imageSrcId;
 
     /**
-     *
-     * @return
-     * The id
+     * @return The id
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * The id
+     * @param id The id
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     *
-     * @param description
-     * The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     *
-     * @return
-     * The imageSrcId
+     * @return The imageSrcId
      */
-    public Object getImageSrcId() {
+    public String getImageSrcId() {
         return imageSrcId;
     }
 
     /**
-     *
-     * @param imageSrcId
-     * The image_src_id
+     * @param imageSrcId The image_src_id
      */
-    public void setImageSrcId(Object imageSrcId) {
+    public void setImageSrcId(String imageSrcId) {
         this.imageSrcId = imageSrcId;
     }
 
