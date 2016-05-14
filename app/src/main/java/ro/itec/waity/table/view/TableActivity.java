@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -42,6 +44,9 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
       setStatusBarTranslucent(true);
 
       presenter = new TablePresenter(this);
+
+      viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+      viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_out));
 
       initFloatingActionButton();
 
@@ -122,11 +127,14 @@ public class TableActivity extends AppCompatActivity implements TableMVP.Require
       }
    }
 
+   /**
+    * Exit point of the activity. When the table ID is obtained, we can forward the user to the OrderActivity
+    * @param id
+    */
    private void onIDObtained(String id) {
       Intent intent = new Intent(this, OrderActivityView.class);
       intent.putExtra("ID", id);
       startActivity(intent);
-      finish();
    }
 
    /**
