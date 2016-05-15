@@ -53,6 +53,8 @@ public interface LoginMvp {
         Observable<UserResponse> getUser(String email, String password);
 
         void saveUserID(int userID);
+
+        void saveUserName(String userName);
     }
 
 }

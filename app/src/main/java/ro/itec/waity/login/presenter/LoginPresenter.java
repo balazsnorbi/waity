@@ -23,7 +23,7 @@ public class LoginPresenter implements LoginMvp.ProvidedPresenterOps {
     }
 
     @Override
-    public void login(String username, String password) {
+    public void login(final String username, String password) {
         Log.d(TAG, "login: ");
 
         if (username.isEmpty()) {
@@ -45,6 +45,7 @@ public class LoginPresenter implements LoginMvp.ProvidedPresenterOps {
                     public void onCompleted() {
                         Log.d(TAG, "onCompleted: ");
                         view.hideProgressBar(1000);
+                       model.saveUserName(username);
                     }
 
                     @Override

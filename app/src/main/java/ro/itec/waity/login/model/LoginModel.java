@@ -19,4 +19,9 @@ public class LoginModel implements LoginMvp.ProvidedModelOps {
         PreferencesMgr.INSTANCE.writeInt(KeyList.KEY_USER_ID, userID);
     }
 
+    @Override
+    public void saveUserName(String userName) {
+        PreferencesMgr.INSTANCE.writeString(KeyList.KEY_USER_NAME, userName);
+    }
+
 }

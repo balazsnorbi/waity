@@ -23,4 +23,14 @@ public enum PreferencesMgr {
         editor.putInt(key, value);
         editor.commit();
     }
+
+    public void writeString(String key, String value) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public String readString(String key) {
+        return preferences.getString(key, "");
+    }
 }
