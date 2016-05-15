@@ -58,6 +58,7 @@ public class ProductModel implements ProductsMVP.ProvidedModelOps {
                     orderBodies.add(new OrderBody(product.productId, product.quantity));
                 }
 
+                TemporaryOrderMgr.INSTANCE.clearTemporaryOrder();
 
                 PlaceOrderResponse placeOrderResponse = ApiServiceManager.getWaityApiService()
                         .addOrder("application/json",
@@ -71,12 +72,11 @@ public class ProductModel implements ProductsMVP.ProvidedModelOps {
                             orderIds.get(i),
                             tmpProduct.productId,
                             tmpProduct.quantity,
-                            tmpProduct.extra,
-                            tmpProduct.description,
-                            tmpProduct.price,
+                            tmpProduct.extra.trim(),
+                            tmpProduct.description.trim(),
+                            tmpProduct.price.trim(),
                             OrderState.STATE_WAITING);
                 }
-                TemporaryOrderMgr.INSTANCE.clearTemporaryOrder();
 
                 subscriber.onNext(temporaryProducts);
                 subscriber.onCompleted();

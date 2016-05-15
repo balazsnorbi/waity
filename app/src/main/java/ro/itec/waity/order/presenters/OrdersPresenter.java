@@ -2,7 +2,7 @@ package ro.itec.waity.order.presenters;
 
 import java.util.List;
 
-import ro.itec.waity.bl.persistence.order.Order;
+import ro.itec.waity.bl.persistence.order.Order2;
 import ro.itec.waity.order.OrdersMVP;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -25,7 +25,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
         subscriptions.add(model.getOrders()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Order>>() {
+                .subscribe(new Subscriber<List<Order2>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -35,7 +35,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
                     }
 
                     @Override
-                    public void onNext(List<Order> orders) {
+                    public void onNext(List<Order2> orders) {
                         view.addOrders(orders);
                     }
                 }));

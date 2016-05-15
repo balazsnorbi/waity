@@ -9,7 +9,7 @@ public enum OrderMgr {
     INSTANCE;
 
     public final void addOrder(Integer orderId, Integer productId, Integer quantity, String extra, String description, String price, OrderState orderState) {
-        Order order = new Order(orderId, productId, quantity, extra, description, price, orderState);
+        Order2 order = new Order2(orderId, productId, quantity, extra, description, price, orderState);
         order.save();
     }
 
@@ -21,7 +21,7 @@ public enum OrderMgr {
      * @return boolean true - success false - failed
      */
     public final boolean modifyOrderState(Integer orderID, OrderState newState) {
-        Order order = Order.find(Order.class, "orderID = ?", "" + orderID).get(0);
+        Order2 order = Order2.find(Order2.class, "orderID = ?", "" + orderID).get(0);
         boolean success = false;
 
         if (order != null) {
@@ -38,7 +38,7 @@ public enum OrderMgr {
      *
      * @return OrderList
      */
-    public final List<Order> getOrdersList() {
-        return Order.listAll(Order.class);
+    public final List<Order2> getOrdersList() {
+        return Order2.listAll(Order2.class);
     }
 }

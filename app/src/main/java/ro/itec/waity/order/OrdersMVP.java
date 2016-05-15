@@ -2,7 +2,7 @@ package ro.itec.waity.order;
 
 import java.util.List;
 
-import ro.itec.waity.bl.persistence.order.Order;
+import ro.itec.waity.bl.persistence.order.Order2;
 import rx.Observable;
 
 public interface OrdersMVP {
@@ -14,7 +14,7 @@ public interface OrdersMVP {
      */
     interface RequiredViewOps {
 
-        void addOrders(List<Order> orders);
+        void addOrders(List<Order2> orders);
     }
 
     /**
@@ -38,7 +38,7 @@ public interface OrdersMVP {
      */
     interface ProvidedModelOps {
 
-        Observable<List<Order>> getOrders();
+        Observable<List<Order2>> getOrders();
 
     }
 

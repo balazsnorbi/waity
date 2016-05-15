@@ -13,21 +13,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ro.itec.waity.R;
-import ro.itec.waity.bl.persistence.order.Order;
+import ro.itec.waity.bl.persistence.order.Order2;
 import ro.itec.waity.order.OrdersMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrdersPresenter;
 
-public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOps{
+public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOps {
 
     private RecyclerView itemsRecyclerView;
     private OrdersMVP.ProvidedPresenterOps presenter;
-    private List<Order> orders;
+    private List<Order2> orders;
     private OrdersRecyclerViewAdapter ordersAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_products, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
         return view;
     }
 
@@ -40,8 +40,19 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         initOrders(view);
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            if (orders != null) {
+                orders.clear();
+            }
+            presenter.fetchOrders();
+        }
+    }
+
     private void initOrders(View view) {
-        itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_products_list);
+        itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_orders_list);
 
         itemsRecyclerView.addItemDecoration(
                 new ListSpacingDecoration(getContext(), R.dimen.item_offset));
@@ -50,13 +61,11 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         orders = new LinkedList<>();
         ordersAdapter = new OrdersRecyclerViewAdapter(orders, getContext());
         itemsRecyclerView.setAdapter(ordersAdapter);
-
-        presenter.fetchOrders();
     }
 
 
     @Override
-    public void addOrders(List<Order> orders) {
+    public void addOrders(List<Order2> orders) {
         this.orders.addAll(orders);
         ordersAdapter.notifyDataSetChanged();
     }
