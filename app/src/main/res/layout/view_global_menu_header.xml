@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
+             android:layout_marginTop="15dp"
              android:background="@android:color/transparent"
              android:clickable="true">
 
@@ -12,8 +13,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="5dp"
-        >
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/ivMenuUserProfilePhoto"
@@ -24,18 +24,13 @@
             android:tint="@color/colorPrimaryDark"/>
 
         <TextView
+            android:id="@+id/nav_draw_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="soul.mxn"
             android:textColor="@color/colorPrimary"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:text="User"/>
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="#dddddd"/>
 </FrameLayout>
