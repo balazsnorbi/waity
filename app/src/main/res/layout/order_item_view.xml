@@ -12,55 +12,60 @@
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="7">
 
             <TextView
                 android:id="@+id/tv_order_status"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:text="Status"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_order_order_id"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:text="Order id"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_order_description"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="3"
                 android:text="Description"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_order_quantity"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:text="Quantity x"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_order_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:paddingLeft="5dp"
+                android:layout_weight="1"
                 android:text="Price"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Description"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_product_price"
@@ -41,7 +41,7 @@
                     android:layout_marginTop="5dp"
                     android:paddingLeft="5dp"
                     android:text="Price"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:id="@+id/iv_product_add"
