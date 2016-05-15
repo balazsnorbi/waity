@@ -1,11 +1,12 @@
 package ro.itec.waity.order.presenters;
 
+import android.util.Log;
+
 import java.util.List;
 
 import ro.itec.waity.api.model.BillResponse;
 import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.bl.persistence.order.Order2;
-import ro.itec.waity.bl.persistence.order.OrderMgr;
 import ro.itec.waity.bl.persistence.order.OrderState;
 import ro.itec.waity.order.OrdersMVP;
 import rx.Subscriber;
@@ -15,6 +16,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
 
+    private static final String TAG = OrdersPresenter.class.getSimpleName();
     private CompositeSubscription subscriptions = new CompositeSubscription();
 
     private OrdersMVP.RequiredViewOps view;
@@ -38,6 +40,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
 
                     @Override
                     public void onError(Throwable e) {
+                        view.hideLoader();
                     }
 
                     @Override
@@ -66,6 +69,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
 
                     @Override
                     public void onNext(BillResponse billResponse) {
+                        Log.d(TAG, "onNext: "+ billResponse.getPrice());
                         view.showBillDialog(billResponse.getPrice());
                     }
                 }));
@@ -99,7 +103,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
         if (deliverResponse.getStatus().equals("ok")) {
             view.hideLoader();
             order.orderState = OrderState.STATE_DELIVERED;
-            OrderMgr.INSTANCE.modifyOrderState(order.orderId, OrderState.STATE_DELIVERED);
+            order.save();
             view.updateOrder(position);
         }
     }
