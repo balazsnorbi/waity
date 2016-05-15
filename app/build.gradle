@@ -64,5 +64,7 @@ dependencies {
     // Persistence
     compile 'com.github.satyan:sugar:1.4'
 
-
+    // Flowing Drawer as navigation drawer
+    compile 'com.mxn.soul:flowingdrawer-core:1.2.2'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

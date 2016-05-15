@@ -1,19 +1,53 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mxn.soul.flowingdrawer_core.LeftDrawerLayout
+    android:id="@+id/id_drawerlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/order_tabs"
+    <!-- Content -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorAccent"
-        android:paddingTop="30dp" />
+        android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/order_viewpager"
-        android:layout_width="match_parent"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/order_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorAccent"
+            android:paddingTop="30dp"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/order_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/order_tabs"/>
+
+    </RelativeLayout>
+
+    <!--menu-->
+    <RelativeLayout
+        android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/order_tabs" />
+        android:layout_gravity="start"
+        android:clipChildren="false">
 
-</RelativeLayout>
+        <!-- Used to display flowing effect -->
+        <com.mxn.soul.flowingdrawer_core.FlowingView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!-- menu content -->
+        <FrameLayout
+            android:id="@+id/id_container_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="25dp"
+            android:paddingRight="10dp"/>
+
+    </RelativeLayout>
+
+</com.mxn.soul.flowingdrawer_core.LeftDrawerLayout>

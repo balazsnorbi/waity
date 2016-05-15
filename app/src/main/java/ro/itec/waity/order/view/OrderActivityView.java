@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
+
+import com.mxn.soul.flowingdrawer_core.FlowingView;
+import com.mxn.soul.flowingdrawer_core.LeftDrawerLayout;
 
 import ro.itec.waity.R;
 import ro.itec.waity.order.view.adapters.ViewPagerAdapter;
@@ -20,7 +24,8 @@ public class OrderActivityView extends AppCompatActivity {
    private TabLayout tabLayout;
    private ViewPager viewPager;
    private ViewPagerAdapter viewPagerAdapter;
-
+   private LeftDrawerLayout mLeftDrawerLayout;
+   private FlowingView flowingView;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,8 @@ public class OrderActivityView extends AppCompatActivity {
       });
 
       viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+      initDrawer();
    }
 
    @Override
@@ -105,5 +112,18 @@ public class OrderActivityView extends AppCompatActivity {
       } else {
          getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
       }
+   }
+
+   private void initDrawer() {
+      mLeftDrawerLayout = (LeftDrawerLayout) findViewById(R.id.id_drawerlayout);
+      flowingView = (FlowingView) findViewById(R.id.sv);
+      FragmentManager fm = getSupportFragmentManager();
+      NavMenuFragment navMenuFragment = (NavMenuFragment) fm.findFragmentById(R.id.id_container_menu);
+      if (navMenuFragment == null) {
+         navMenuFragment = new NavMenuFragment();
+         fm.beginTransaction().add(R.id.id_container_menu, navMenuFragment).commit();
+      }
+      mLeftDrawerLayout.setFluidView(flowingView);
+      mLeftDrawerLayout.setMenuFragment(navMenuFragment);
    }
 }
