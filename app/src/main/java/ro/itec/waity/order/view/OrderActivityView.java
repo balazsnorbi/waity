@@ -16,9 +16,13 @@ import com.mxn.soul.flowingdrawer_core.FlowingView;
 import com.mxn.soul.flowingdrawer_core.LeftDrawerLayout;
 
 import ro.itec.waity.R;
+import ro.itec.waity.bl.shared_preferences.KeyList;
+import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
+import ro.itec.waity.login.view.LoginActivityView;
 import ro.itec.waity.order.view.adapters.ViewPagerAdapter;
+import ro.itec.waity.order.view.listeners.LogoutRequestListener;
 
-public class OrderActivityView extends AppCompatActivity {
+public class OrderActivityView extends AppCompatActivity implements LogoutRequestListener {
    private static final String TAG = OrderActivityView.class.getSimpleName();
 
    private TabLayout tabLayout;
@@ -123,7 +127,19 @@ public class OrderActivityView extends AppCompatActivity {
          navMenuFragment = new NavMenuFragment();
          fm.beginTransaction().add(R.id.id_container_menu, navMenuFragment).commit();
       }
+
+      navMenuFragment.setLogoutListener(this);
+
       mLeftDrawerLayout.setFluidView(flowingView);
       mLeftDrawerLayout.setMenuFragment(navMenuFragment);
+   }
+
+   @Override
+   public void onLogoutRequested() {
+      PreferencesMgr.INSTANCE.writeInt(KeyList.KEY_DESK_ID, 0);
+      PreferencesMgr.INSTANCE.writeInt(KeyList.KEY_USER_ID, 0);
+      PreferencesMgr.INSTANCE.writeString(KeyList.KEY_USER_NAME, "");
+      startActivity(new Intent(this, LoginActivityView.class));
+      finish();
    }
 }

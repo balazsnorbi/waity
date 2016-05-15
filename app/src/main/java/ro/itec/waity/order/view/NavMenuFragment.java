@@ -17,11 +17,18 @@ import org.w3c.dom.Text;
 import ro.itec.waity.R;
 import ro.itec.waity.bl.shared_preferences.KeyList;
 import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
+import ro.itec.waity.order.view.listeners.LogoutRequestListener;
 
 /**
  * Created by Norbert on 5/15/2016.
  */
 public class NavMenuFragment extends MenuFragment {
+
+   private LogoutRequestListener logoutRequestListener;
+
+   public void setLogoutListener(LogoutRequestListener logoutRequestListener) {
+      this.logoutRequestListener = logoutRequestListener;
+   }
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +45,7 @@ public class NavMenuFragment extends MenuFragment {
          @Override
          public void onClick(View v) {
             Toast.makeText(getContext(), "Logout nou!", Toast.LENGTH_SHORT).show();
+            logoutRequestListener.onLogoutRequested();
          }
       });
 
