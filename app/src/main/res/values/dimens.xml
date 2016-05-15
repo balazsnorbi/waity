@@ -9,4 +9,5 @@
     <dimen name="item_offset">10dp</dimen>
     <dimen name="avatar_width">96dp</dimen>
     <dimen name="avatar_height">96dp</dimen>
+    <dimen name="item_offset_2">5dp</dimen>
 </resources>

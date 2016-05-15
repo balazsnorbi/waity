@@ -61,6 +61,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
 
                     @Override
                     public void onError(Throwable e) {
+                        view.hideLoader();
                     }
 
                     @Override
@@ -96,6 +97,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
 
     private void processResponse(OrderDeliverResponse deliverResponse, Order2 order, int position) {
         if (deliverResponse.getStatus().equals("ok")) {
+            view.hideLoader();
             order.orderState = OrderState.STATE_DELIVERED;
             OrderMgr.INSTANCE.modifyOrderState(order.orderId, OrderState.STATE_DELIVERED);
             view.updateOrder(position);

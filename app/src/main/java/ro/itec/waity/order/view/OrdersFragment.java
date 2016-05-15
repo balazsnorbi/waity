@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
 
     @BindView(R.id.pb_orders_progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.tv_orders_no_orders)
+    TextView tvNoOrders;
 
     private RecyclerView itemsRecyclerView;
     private OrdersMVP.ProvidedPresenterOps presenter;
@@ -68,7 +71,7 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         itemsRecyclerView = (RecyclerView) view.findViewById(R.id.rv_orders_list);
 
         itemsRecyclerView.addItemDecoration(
-                new ListSpacingDecoration(getContext(), R.dimen.item_offset));
+                new ListSpacingDecoration(getContext(), R.dimen.item_offset_2));
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         orders = new LinkedList<>();
@@ -84,6 +87,11 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
     @Override
     public void addOrders(List<Order2> orders) {
         this.orders.addAll(orders);
+        if (orders.size() == 0) {
+            tvNoOrders.setVisibility(View.VISIBLE);
+        } else {
+            tvNoOrders.setVisibility(View.INVISIBLE);
+        }
         ordersAdapter.notifyDataSetChanged();
     }
 
