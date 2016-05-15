@@ -110,7 +110,8 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("PAY", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
+                orders.clear();
+                ordersAdapter.notifyDataSetChanged();
             }
         });
         builder.setTitle("Bill");
