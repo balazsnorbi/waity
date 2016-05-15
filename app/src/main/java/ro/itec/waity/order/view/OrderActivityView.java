@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import ro.itec.waity.R;
+import ro.itec.waity.order.view.adapters.ViewPagerAdapter;
 
 public class OrderActivityView extends AppCompatActivity {
    private static final String TAG = OrderActivityView.class.getSimpleName();

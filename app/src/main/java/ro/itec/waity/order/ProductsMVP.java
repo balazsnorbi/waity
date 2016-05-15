@@ -1,13 +1,15 @@
 package ro.itec.waity.order;
 
+import java.util.List;
+
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.api.model.ProductsResponse;
 import ro.itec.waity.api.model.Produse;
-import ro.itec.waity.api.model.PlaceOrderResponse;
+import ro.itec.waity.bl.persistence.temporary_order.TemporaryProduct;
 import rx.Observable;
 
-public interface OrderMVP {
+public interface ProductsMVP {
 
     /**
      * Required View methods available to Presenter.
@@ -65,7 +67,7 @@ public interface OrderMVP {
 
         Observable<Void> addTempProductOrder(Produse product, Integer quantity, String extra);
 
-        Observable<PlaceOrderResponse> checkoutTempOrder();
+        Observable<List<TemporaryProduct>> checkoutTempOrder();
 
     }
 

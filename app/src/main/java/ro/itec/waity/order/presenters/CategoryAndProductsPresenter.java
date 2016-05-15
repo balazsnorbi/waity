@@ -3,28 +3,32 @@ package ro.itec.waity.order.presenters;
 import android.util.Log;
 
 import java.util.List;
+import java.util.Map;
 
+import ro.itec.waity.api.model.Category;
+import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.api.model.PlaceOrderResponse;
 import ro.itec.waity.api.model.ProductsResponse;
 import ro.itec.waity.api.model.Produse;
-import ro.itec.waity.api.model.Category;
-import ro.itec.waity.api.model.CategoryResponse;
-import ro.itec.waity.order.OrderMVP;
+import ro.itec.waity.bl.persistence.order.OrderMgr;
+import ro.itec.waity.bl.persistence.order.OrderState;
+import ro.itec.waity.bl.persistence.temporary_order.TemporaryProduct;
+import ro.itec.waity.order.ProductsMVP;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
-    private static final String TAG = OrderCategoryPresenter.class.getSimpleName();
+public class CategoryAndProductsPresenter implements ProductsMVP.ProvidedPresenterOps {
+    private static final String TAG = CategoryAndProductsPresenter.class.getSimpleName();
 
-    private final OrderMVP.ProvidedModelOps model;
+    private final ProductsMVP.ProvidedModelOps model;
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
-    private final OrderMVP.RequiredViewOps view;
+    private final ProductsMVP.RequiredViewOps view;
 
-    public OrderCategoryPresenter(OrderMVP.RequiredViewOps view, OrderMVP.ProvidedModelOps model) {
+    public CategoryAndProductsPresenter(ProductsMVP.RequiredViewOps view, ProductsMVP.ProvidedModelOps model) {
         this.view = view;
         this.model = model;
     }
@@ -156,7 +160,7 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
         subscriptions.add(model.checkoutTempOrder()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<PlaceOrderResponse>() {
+                .subscribe(new Subscriber<List<TemporaryProduct>>() {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted: ");
@@ -171,8 +175,8 @@ public class OrderCategoryPresenter implements OrderMVP.ProvidedPresenterOps {
                     }
 
                     @Override
-                    public void onNext(PlaceOrderResponse placeOrderResponse) {
-                        Log.d(TAG, "onNext: " + placeOrderResponse);
+                    public void onNext(List<TemporaryProduct> products) {
+                        Log.d(TAG, "onNext: ");
                     }
                 }));
     }

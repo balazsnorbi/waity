@@ -1,4 +1,4 @@
-package ro.itec.waity.order.view;
+package ro.itec.waity.order.view.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.LinkedList;
 import java.util.List;
 
+import ro.itec.waity.order.view.OrdersFragment;
+import ro.itec.waity.order.view.ProductsFragment;
 import ro.itec.waity.order.view.listeners.OnBackPressedListener;
 
 
