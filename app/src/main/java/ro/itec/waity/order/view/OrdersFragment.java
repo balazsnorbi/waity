@@ -108,7 +108,7 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
     @Override
     public void showBillDialog(String price) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("PAY", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
             }
