@@ -8,17 +8,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ro.itec.waity.R;
 import ro.itec.waity.bl.persistence.order.Order2;
 import ro.itec.waity.order.OrdersMVP;
 import ro.itec.waity.order.model.OrderModel;
 import ro.itec.waity.order.presenters.OrdersPresenter;
+import ro.itec.waity.order.view.adapters.OrdersRecyclerViewAdapter;
+import ro.itec.waity.order.view.listeners.OnOrderClickListener;
 
-public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOps {
+public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOps, OnOrderClickListener {
+
+    @BindView(R.id.pb_orders_progressBar)
+    ProgressBar progressBar;
 
     private RecyclerView itemsRecyclerView;
     private OrdersMVP.ProvidedPresenterOps presenter;
@@ -28,12 +37,14 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         presenter = new OrdersPresenter(this, new OrderModel());
 
@@ -59,10 +70,14 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         orders = new LinkedList<>();
-        ordersAdapter = new OrdersRecyclerViewAdapter(orders, getContext());
+        ordersAdapter = new OrdersRecyclerViewAdapter(orders, this);
         itemsRecyclerView.setAdapter(ordersAdapter);
     }
 
+    @OnClick(R.id.fb_orders_bill)
+    void onBillClick() {
+        presenter.makeBill();
+    }
 
     @Override
     public void addOrders(List<Order2> orders) {
@@ -70,4 +85,28 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
         ordersAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showLoader() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoader() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showBillDialog() {
+
+    }
+
+    @Override
+    public void updateOrder(int position) {
+        ordersAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void onOrderClick(Order2 order, int position) {
+        presenter.onOrderClick(order, position);
+    }
 }

@@ -11,6 +11,7 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.api.model.OrderBody;
+import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.api.model.PlaceOrderResponse;
 import ro.itec.waity.api.model.ProductsResponse;
 import ro.itec.waity.api.model.TableResponse;
@@ -44,5 +45,10 @@ public interface WaityApiService {
     @POST("table")
     Observable<TableResponse> getTableIdFromNfc(@Field("nfc") String id);
 
+    @GET("deliver/{orderId}")
+    Observable<OrderDeliverResponse> orderDeliver(@Path("orderId") Integer orderId);
+
+    @GET("bill/{tableId}")
+    Observable<Integer> getBill(@Path("tableId") Integer tableId);
 
 }

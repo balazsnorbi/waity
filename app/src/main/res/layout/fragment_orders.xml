@@ -4,10 +4,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/ll_fragment_order_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_watch_later" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_format_list_numbered" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            android:src="@drawable/ic_free_breakfast" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_exposure_plus_1" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_attach_money" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_orders_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_fragment_order_header"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_orders_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/ll_fragment_order_header"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -17,11 +77,10 @@
         android:id="@+id/fb_orders_bill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:visibility="invisible"
-        android:src="@drawable/ic_payment" />
+        android:src="@drawable/ic_monetization_on" />
 
 </RelativeLayout>

@@ -2,8 +2,12 @@ package ro.itec.waity.order.model;
 
 import java.util.List;
 
+import ro.itec.waity.api.ApiServiceManager;
+import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.bl.persistence.order.Order2;
 import ro.itec.waity.bl.persistence.order.OrderMgr;
+import ro.itec.waity.bl.shared_preferences.KeyList;
+import ro.itec.waity.bl.shared_preferences.PreferencesMgr;
 import ro.itec.waity.order.OrdersMVP;
 import rx.Observable;
 import rx.Subscriber;
@@ -18,5 +22,16 @@ public class OrderModel implements OrdersMVP.ProvidedModelOps {
                 subscriber.onCompleted();
             }
         });
+    }
+
+    @Override
+    public Observable<Integer> makeBill() {
+        return ApiServiceManager.getWaityApiService().getBill(
+                PreferencesMgr.INSTANCE.readInt(KeyList.KEY_DESK_ID));
+    }
+
+    @Override
+    public Observable<OrderDeliverResponse> deliverOrder(final Order2 order) {
+        return ApiServiceManager.getWaityApiService().orderDeliver(order.orderId);
     }
 }

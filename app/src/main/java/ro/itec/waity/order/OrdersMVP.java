@@ -2,6 +2,7 @@ package ro.itec.waity.order;
 
 import java.util.List;
 
+import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.bl.persistence.order.Order2;
 import rx.Observable;
 
@@ -15,6 +16,15 @@ public interface OrdersMVP {
     interface RequiredViewOps {
 
         void addOrders(List<Order2> orders);
+
+        void showLoader();
+
+        void hideLoader();
+
+        void showBillDialog();
+
+        void updateOrder(int position);
+
     }
 
     /**
@@ -24,6 +34,10 @@ public interface OrdersMVP {
     interface ProvidedPresenterOps {
 
         void fetchOrders();
+
+        void makeBill();
+
+        void onOrderClick(Order2 order, int position);
     }
 
     /**
@@ -40,6 +54,9 @@ public interface OrdersMVP {
 
         Observable<List<Order2>> getOrders();
 
+        Observable<Integer> makeBill();
+
+        Observable<OrderDeliverResponse> deliverOrder(Order2 order);
     }
 
 }
