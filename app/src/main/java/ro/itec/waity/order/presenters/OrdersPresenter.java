@@ -2,6 +2,7 @@ package ro.itec.waity.order.presenters;
 
 import java.util.List;
 
+import ro.itec.waity.api.model.BillResponse;
 import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.bl.persistence.order.Order2;
 import ro.itec.waity.bl.persistence.order.OrderMgr;
@@ -52,7 +53,7 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
         subscriptions.add(model.makeBill()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Integer>() {
+                .subscribe(new Subscriber<BillResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hideLoader();
@@ -63,8 +64,8 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
                     }
 
                     @Override
-                    public void onNext(Integer total) {
-                        view.showBillDialog();
+                    public void onNext(BillResponse billResponse) {
+                        view.showBillDialog(billResponse.getPrice());
                     }
                 }));
     }

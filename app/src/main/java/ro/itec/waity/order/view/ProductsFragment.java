@@ -1,11 +1,14 @@
 package ro.itec.waity.order.view;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -26,6 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ro.itec.waity.BuildConfig;
 import ro.itec.waity.R;
 import ro.itec.waity.api.model.Category;
 import ro.itec.waity.api.model.Produse;
@@ -169,6 +173,18 @@ public class ProductsFragment extends Fragment
     @Override
     public void hideFloatingCheckout() {
         fbCheckout.setVisibility(View.INVISIBLE);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setTitle("Order");
+        builder.setMessage("Your products were registered.");
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -217,7 +233,9 @@ public class ProductsFragment extends Fragment
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Dialog);
+            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Dialog);
+            }
         }
 
         @Override

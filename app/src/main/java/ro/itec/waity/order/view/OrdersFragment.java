@@ -1,8 +1,10 @@
 package ro.itec.waity.order.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -96,8 +98,18 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
     }
 
     @Override
-    public void showBillDialog() {
-
+    public void showBillDialog(String price) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setTitle("Bill");
+        builder.setMessage("Total: " + price);
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

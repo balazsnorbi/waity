@@ -9,6 +9,7 @@ import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import ro.itec.waity.api.model.BillResponse;
 import ro.itec.waity.api.model.CategoryResponse;
 import ro.itec.waity.api.model.OrderBody;
 import ro.itec.waity.api.model.OrderDeliverResponse;
@@ -49,6 +50,6 @@ public interface WaityApiService {
     Observable<OrderDeliverResponse> orderDeliver(@Path("orderId") Integer orderId);
 
     @GET("bill/{tableId}")
-    Observable<Integer> getBill(@Path("tableId") Integer tableId);
+    Observable<BillResponse> getBill(@Path("tableId") Integer tableId);
 
 }

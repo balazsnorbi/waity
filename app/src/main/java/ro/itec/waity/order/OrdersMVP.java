@@ -2,6 +2,7 @@ package ro.itec.waity.order;
 
 import java.util.List;
 
+import ro.itec.waity.api.model.BillResponse;
 import ro.itec.waity.api.model.OrderDeliverResponse;
 import ro.itec.waity.bl.persistence.order.Order2;
 import rx.Observable;
@@ -21,7 +22,7 @@ public interface OrdersMVP {
 
         void hideLoader();
 
-        void showBillDialog();
+        void showBillDialog(String price);
 
         void updateOrder(int position);
 
@@ -54,7 +55,7 @@ public interface OrdersMVP {
 
         Observable<List<Order2>> getOrders();
 
-        Observable<Integer> makeBill();
+        Observable<BillResponse> makeBill();
 
         Observable<OrderDeliverResponse> deliverOrder(Order2 order);
     }
