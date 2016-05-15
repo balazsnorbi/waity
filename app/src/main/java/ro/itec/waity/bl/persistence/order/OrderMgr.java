@@ -41,4 +41,8 @@ public enum OrderMgr {
     public final List<Order2> getOrdersList() {
         return Order2.listAll(Order2.class);
     }
+
+    public final void clear() {
+        Order2.deleteAll(Order2.class);
+    }
 }

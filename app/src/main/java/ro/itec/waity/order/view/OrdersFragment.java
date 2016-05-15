@@ -106,7 +106,7 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
     }
 
     @Override
-    public void showBillDialog(String price) {
+    public void showBillDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("PAY", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -114,7 +114,7 @@ public class OrdersFragment extends Fragment implements OrdersMVP.RequiredViewOp
             }
         });
         builder.setTitle("Bill");
-        builder.setMessage("Total: " + price);
+        builder.setMessage("Bill will arrive soon.");
         // Create the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();

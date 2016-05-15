@@ -22,7 +22,7 @@ public interface OrdersMVP {
 
         void hideLoader();
 
-        void showBillDialog(String price);
+        void showBillDialog();
 
         void updateOrder(int position);
 

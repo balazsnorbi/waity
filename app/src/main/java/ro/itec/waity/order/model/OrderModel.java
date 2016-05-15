@@ -27,6 +27,8 @@ public class OrderModel implements OrdersMVP.ProvidedModelOps {
 
     @Override
     public Observable<BillResponse> makeBill() {
+        // FIXME: remove
+        OrderMgr.INSTANCE.clear();
         return ApiServiceManager.getWaityApiService().getBill(
                 PreferencesMgr.INSTANCE.readInt(KeyList.KEY_DESK_ID));
     }

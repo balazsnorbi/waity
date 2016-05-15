@@ -60,17 +60,18 @@ public class OrdersPresenter implements OrdersMVP.ProvidedPresenterOps {
                     @Override
                     public void onCompleted() {
                         view.hideLoader();
+                        view.showBillDialog();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         view.hideLoader();
+                        view.showBillDialog();
                     }
 
                     @Override
                     public void onNext(BillResponse billResponse) {
                         Log.d(TAG, "onNext: "+ billResponse.getPrice());
-                        view.showBillDialog(billResponse.getPrice());
                     }
                 }));
     }
