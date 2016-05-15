@@ -21,7 +21,7 @@ public enum OrderMgr {
      * @return boolean true - success false - failed
      */
     public final boolean modifyOrderState(Integer orderID, OrderState newState) {
-        Order2 order = Order2.find(Order2.class, "orderID = ?", "" + orderID).get(0);
+        Order2 order = Order2.find(Order2.class, "orderId = ?", "" + orderID).get(0);
         boolean success = false;
 
         if (order != null) {
